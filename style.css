@@ -1,0 +1,10 @@
+#app{
+  width: 300;
+  height: 450;
+  border: solid black 1px
+}
+
+#buttons{
+  position: absolute;
+  bottom: 30px
+}
