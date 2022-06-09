@@ -8,3 +8,11 @@
   position: absolute;
   bottom: 30px
 }
+
+#title{
+  text-align: center;
+}
+
+#subtitle{
+  text-align: center;
+}
