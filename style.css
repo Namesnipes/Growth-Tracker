@@ -1,18 +1,133 @@
-#app{
-  width: 300;
-  height: 450;
-  border: solid black 1px
+body{
+  width: 325;
+  height: 550;
+  border: solid black 1px;
+  background-color: #F3F1ED;
 }
-
-#buttons{
-  position: absolute;
-  bottom: 30px
+#HomeContent{
+  margin: 20px;
 }
-
-#title{
+.headers{
   text-align: center;
 }
-
-#subtitle{
+#yearHeader{
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+#currentDayHeader{
+  margin-bottom: 0px;
+}
+.moodImage{
+  height: 215px;
+  width: auto;
+  display: block;
+  margin: 0px auto;
+}
+.clear{
+  clear: both;
+}
+#horrible{
+  width: 30px;
+  height: 30px;
+  background-color: #0061A1;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#horrible:hover p{
+  visibility: visible;
+}
+#bad{
+  width: 30px;
+  height: 30px;
+  background-color: #15A0B0;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#bad:hover p{
+  visibility: visible;
+}
+#ok{
+  width: 30px;
+  height: 30px;
+  background-color: #58CCAD;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#ok:hover p{
+  visibility: visible;
+}
+#good{
+  width: 30px;
+  height: 30px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#good:hover p{
+  visibility: visible;
+}
+#great{
+  width: 30px;
+  height: 30px;
+  background-color: #9CD97E;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#great:hover p{
+  visibility: visible;
+}
+#moodButtons{
+  display: block;
+  margin: 0px auto;
+  width: 200px;
+  padding: 10px;
+}
+.moods{
+  font-size: 11px;
+  margin-top: 36px;
   text-align: center;
+  visibility: hidden;
+}
+textarea{
+  resize: none;
+  border: none;
+  background-color: #C6E5B7;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 2px;
+}
+#miniJournal{
+  padding-top: 8px;
+  display: block;
+  width: 216px;
+  margin: 0px auto;
+}
+#expandButton{
+  background-color: #58CCAD;
+  font-size: 11px;
+  text-align: center;
+  line-height: 15px;
+  margin: 3px 5px 0px 0px;
+  width: 35px;
+  height: 15px;
+  padding: 2px;
+  float: right;
+  border-radius: 2px;
+}
+#journalSubmitButton{
+  background-color: #58CCAD;
+  font-size: 11px;
+  text-align: center;
+  line-height: 15px;
+  margin-top: 3px;
+  width: 20px;
+  height: 15px;
+  padding: 2px;
+  float: right;
+  border-radius: 2px;
 }

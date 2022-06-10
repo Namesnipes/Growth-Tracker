@@ -3,17 +3,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <h1 id="title">Home Page :D</h1>
-    <h2 id="subtitle">Sub</h1>
-    <textarea id="textbox">Lorem Ipsum</textarea>
-    <button id="textboxSubmitButton">Submit</button>
-    <div id="buttons">
-      <button id="homeButton">Home</button>
-      <button id="calendarButton">calendar</button>
-      <button id="journalButton">Journal</button>
+    <div id="HomeContent">
+      <h1 id="currentDayHeader" class="headers">Month Nth</h1>
+      <h2 id="yearHeader" class="headers">year</h2>
+      <img class="moodImage" src="assets/plant.png"/>
+      <div id="moodButtons">
+        <!--the Moods-->
+        <div id="horrible">
+          <p class="moods">awful</p>
+        </div>
+        <div id="bad">
+          <p class="moods">bad</p>
+        </div>
+        <div id="ok">
+          <p class="moods">ok</p>
+        </div>
+        <div id="good">
+          <p class="moods">good</p>
+        </div>
+        <div id="great">
+          <p class="moods">great</p>
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="miniJournal">
+        <textarea id="notes" name="notes" rows="4" cols="25" maxlength="120" placeholder="My day..."></textarea>
+        <div id="journalSubmitButton">save</div>
+        <div id="expandButton">expand</div>
+      </div>
     </div>
-    </div>
+
 </body>
 <script src="popup.js"></script>
 </html>
