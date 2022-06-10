@@ -39,8 +39,9 @@ function setData(data){
 function getData(key,callback){
   var storageItem = browser.storage.local.get(key);
   storageItem.then((data) => {
-    if(!data) callback("")
-    callback(data[key])
+    var text = data[key]
+    if(!text) callback("")
+    callback(text)
   })
   .catch((error) => {
     console.error(error)
