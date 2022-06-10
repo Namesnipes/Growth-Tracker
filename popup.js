@@ -1,9 +1,10 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-var homeButton = document.getElementById("homeButton")
-var calendarButton = document.getElementById("calendarButton")
-var journalButton = document.getElementById("journalButton")
-var textboxSubmitButton = document.getElementById("textboxSubmitButton")
+var textboxSubmitButton = document.getElementById("journalSubmitButton")
+var title = document.getElementById("currentDayHeader")
+var subtitle = document.getElementById("yearHeader")
+var textbox = document.getElementById("notes")
+
 
 var dateString;
 var yearNumber;
@@ -38,6 +39,7 @@ function setData(data){
 function getData(key,callback){
   var storageItem = browser.storage.local.get(key);
   storageItem.then((data) => {
+    if(!data) callback("")
     callback(data[key])
   })
   .catch((error) => {
@@ -80,9 +82,6 @@ function nth(i){
 
 //EVENTS
 textboxSubmitButton.addEventListener("click", saveTextBox)
-homeButton.addEventListener("click", goToHomePage)
-calendarButton.addEventListener("click", goToCalendarPage)
-journalButton.addEventListener("click", goToJournalPage)
 
 document.addEventListener("DOMContentLoaded", pageLoaded);
 
