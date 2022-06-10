@@ -39,9 +39,12 @@ function setData(data){
 function getData(key,callback){
   var storageItem = browser.storage.local.get(key);
   storageItem.then((data) => {
-    var text = data[key]
-    if(!text) callback("")
-    callback(text)
+    if(data[key] === undefined){
+      console.log("No data is saved!!")
+      callback("")
+    } else {
+      callback(data[key])
+    }
   })
   .catch((error) => {
     console.error(error)
@@ -50,6 +53,7 @@ function getData(key,callback){
 
 //SETTERS
 function updateTextBox(text){
+  console.log("pu8tting in: " + text)
   textbox.value = text
 }
 
