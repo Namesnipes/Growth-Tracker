@@ -160,6 +160,9 @@ textarea{
 h4{
   margin-bottom: 0px;
 }
+#calendarPage{
+  display: none;
+}
 table{
   background-color: yellow;
   border-collapse: collapse;
