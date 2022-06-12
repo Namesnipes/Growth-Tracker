@@ -10,7 +10,9 @@ var textbox = document.getElementById("notes")
 var homePage = document.getElementById("HomeContent")
 
 var dateString;
-var yearNumber;
+var currentYear = new Date().getFullYear()
+
+var userData;
 
 //SWITCH PAGES
 function goToHomePage(){
@@ -23,13 +25,13 @@ function goToCalendarPage(){
 }
 
 function goToJournalPage(){
-  title.textContent = dateString + " - Journal"
+  title.textContent = ""
   homePage.style.display = 'none'
 
 }
 
 
-//DATA IO
+//DATA I/O
 function saveTextBox(){
   var text = textbox.value
   console.log("Saving: " + text)
@@ -59,7 +61,6 @@ function getData(key,callback){
 
 //SETTERS
 function updateTextBox(text){
-  console.log("pu8tting in: " + text)
   textbox.value = text
 }
 
@@ -67,12 +68,12 @@ function updateDate(){
   var now = new Date()
   var dateNumber = now.getDate()
   var monthString = month[now.getMonth()]
-  yearNumber = now.getFullYear()
+  currentYear = now.getFullYear()
 
   dateString = monthString + " " + dateNumber + nth(dateNumber)
 
   title.textContent = dateString
-  subtitle.textContent = yearNumber
+  subtitle.textContent = currentYear
 
 }
 
@@ -100,3 +101,27 @@ document.addEventListener("DOMContentLoaded", pageLoaded);
 window.addEventListener("unload", function(){
   console.log("bye")
 })
+
+
+
+function init(data){
+  if(data == ""){ //user has no previous journal/mood entries so we create their first dateframe!
+    data = {}
+    for(var year = currentYear-1; year <= currentYear + 1; year++){
+      data[year.toString()] = []
+      for(var monthNum = 0; monthNum < month.length; monthNum++){
+        daysInMonth = new Date(year,monthNum,0).getDate()
+        data[year.toString()][monthNum] = []
+        for(var dayNum = 0; dayNum < daysInMonth; dayNum++){
+          data[year.toString()][monthNum][dayNum] = {"entry":"","mood":-1}
+        }
+      }
+    }
+    console.log(data)
+    userData = data
+  } else {
+
+  }
+}
+
+getData("moodJournalData",init)
