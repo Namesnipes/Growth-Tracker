@@ -5,9 +5,11 @@ var expandButton = document.getElementById("expandButton")
 
 var title = document.getElementById("currentDayHeader")
 var subtitle = document.getElementById("yearHeader")
+var headers = document.getElementsByClassName("headers")
 var textbox = document.getElementById("notes")
 
 var homePage = document.getElementById("HomeContent")
+var calendarPage  = document.getElementById("calendarPage")
 
 var dateString;
 var currentYear = new Date().getFullYear()
@@ -17,15 +19,21 @@ var userData;
 //SWITCH PAGES
 function goToHomePage(){
   title.textContent = dateString + " - Home"
+  calendarPage.style.display = 'none'
 }
 
 function goToCalendarPage(){
-  title.textContent = dateString + " - Calendar"
+  for(var i = 0; i < headers.length; i++){
+    headers[i].style.display = 'none'
+  }
   homePage.style.display = 'none'
+  calendarPage.style.display = 'block'
 }
 
 function goToJournalPage(){
-  title.textContent = ""
+  for(var i = 0; i < headers.length; i++){
+    headers[i].style.display = 'none'
+  }
   homePage.style.display = 'none'
 
 }
@@ -94,7 +102,7 @@ function nth(i){
 
 //EVENTS
 textboxSubmitButton.addEventListener("click", saveTextBox)
-expandButton.addEventListener("click", goToJournalPage)
+expandButton.addEventListener("click", goToCalendarPage)
 
 document.addEventListener("DOMContentLoaded", pageLoaded);
 
