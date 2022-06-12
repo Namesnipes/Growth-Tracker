@@ -51,7 +51,7 @@ function goToCalendarPage(){
 
 function goToJournalPage(){
   for(var i = 0; i < headers.length; i++){
-    headers[i].style.display = 'none'
+    headers[i].style.display = 'block'
   }
   homePage.style.display = 'none'
   calendarPage.style.display = 'none'
