@@ -4,7 +4,7 @@ body{
   border: solid black 1px;
   background-color: #F3F1ED;
 }
-#HomeContent{
+#content{
   margin: 20px;
 }
 .headers{
@@ -119,6 +119,7 @@ textarea{
   padding: 2px;
   float: right;
   border-radius: 2px;
+  cursor: pointer;
 }
 #journalSubmitButton{
   background-color: #58CCAD;
@@ -131,4 +132,5 @@ textarea{
   padding: 2px;
   float: right;
   border-radius: 2px;
+  cursor: pointer;
 }
