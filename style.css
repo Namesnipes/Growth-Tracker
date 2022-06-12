@@ -1,8 +1,28 @@
+@font-face {
+  font-family: "Calistoga";
+  src: url("assets/Calistoga-Regular.ttf");
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/Cousine-Regular.ttf");
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/Cousine-Italic.ttf");
+  font-style: italic;
+}
 body{
   width: 400;
   height: 550;
   border: solid black 1px;
   background-color: #F3F1ED;
+}
+h1, h2, h3, h4{
+  font-family: "Calistoga", serif;
+  font-weight: normal;
+}
+p{
+  font-family: "Cousine", monospace;
 }
 #content{
   margin: 10px;
@@ -88,7 +108,7 @@ body{
   padding: 10px;
 }
 .moods{
-  font-size: 11px;
+  font-size: 10px;
   margin-top: 36px;
   text-align: center;
   visibility: hidden;
@@ -101,6 +121,7 @@ textarea{
   padding: 10px;
   font-size: 12px;
   border-radius: 2px;
+  font-family: "Cousine", monospace;
 }
 #miniJournal{
   padding-top: 8px;
@@ -110,29 +131,31 @@ textarea{
 }
 #expandButton{
   background-color: #58CCAD;
-  font-size: 11px;
+  font-size: 10px;
   text-align: center;
   line-height: 15px;
   margin: 3px 5px 0px 0px;
-  width: 35px;
+  width: 40px;
   height: 15px;
   padding: 2px;
   float: right;
   border-radius: 2px;
   cursor: pointer;
+  font-family: "Cousine", monospace;
 }
 #journalSubmitButton{
   background-color: #58CCAD;
-  font-size: 11px;
+  font-size: 10px;
   text-align: center;
   line-height: 15px;
   margin-top: 3px;
-  width: 20px;
+  width: 25px;
   height: 15px;
   padding: 2px;
   float: right;
   border-radius: 2px;
   cursor: pointer;
+  font-family: "Cousine", monospace;
 }
 h4{
   margin-bottom: 0px;
