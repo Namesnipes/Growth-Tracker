@@ -26,6 +26,8 @@ p{
 }
 #content{
   margin: 10px;
+  position: relative;
+  height: 530px;
 }
 #HomeContent{
   position: relative;
@@ -39,6 +41,7 @@ p{
 }
 #currentDayHeader{
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 .moodImage{
   height: 215px;
@@ -161,8 +164,13 @@ textarea{
   cursor: pointer;
   font-family: "Cousine", monospace;
 }
+#journalPage{
+  display: none;
+  margin-top: 15px;
+}
 #largeJournal{
-  width: 380px;
+  display: block;
+  width: 360px;
   margin: 0px auto;
 }
 h4{
@@ -187,13 +195,42 @@ td{
 }
 #buttons{
   width: 380px;
-  height: 28px;
+  height: 24px;
+  position: absolute;
+  bottom: 0px;
 }
 #cornerButton{
   height: 30px;
   width: auto;
   position: absolute;
   right: -10px;
-  bottom: -37px;
+  bottom: -49px;
+  cursor: pointer;
+}
+#homeIcon{
+  height: 20px;
+  width: auto;
+}
+#homeButton{
+  height: 20px;
+  width: 20px;
+  padding: 2px;
+  background-color: #58CCAD;
+  border-radius: 2px;
+  float: left;
+  cursor: pointer;
+}
+#helpIcon{
+  height: 20px;
+  width: auto;
+}
+#helpButton{
+  height: 20px;
+  width: 20px;
+  padding: 2px;
+  background-color: #58CCAD;
+  border-radius: 2px;
+  float: left;
+  margin-right: 10px;
   cursor: pointer;
 }
