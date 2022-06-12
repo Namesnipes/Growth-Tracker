@@ -1,10 +1,13 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 var textboxSubmitButton = document.getElementById("journalSubmitButton")
+var expandButton = document.getElementById("expandButton")
+
 var title = document.getElementById("currentDayHeader")
 var subtitle = document.getElementById("yearHeader")
 var textbox = document.getElementById("notes")
 
+var homePage = document.getElementById("content")
 
 var dateString;
 var yearNumber;
@@ -16,10 +19,13 @@ function goToHomePage(){
 
 function goToCalendarPage(){
   title.textContent = dateString + " - Calendar"
+  homePage.style.display = 'none'
 }
 
 function goToJournalPage(){
   title.textContent = dateString + " - Journal"
+  homePage.style.display = 'none'
+
 }
 
 
@@ -87,6 +93,7 @@ function nth(i){
 
 //EVENTS
 textboxSubmitButton.addEventListener("click", saveTextBox)
+expandButton.addEventListener("click", goToJournalPage)
 
 document.addEventListener("DOMContentLoaded", pageLoaded);
 
