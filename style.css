@@ -158,7 +158,9 @@ textarea{
   font-family: "Cousine", monospace;
 }
 h4{
-  margin-bottom: 0px;
+  margin-bottom: 1px;
+  margin-top: 10px;
+  font-size: 13px;
 }
 #calendarPage{
   display: none;
