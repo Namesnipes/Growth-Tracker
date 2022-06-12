@@ -3,6 +3,7 @@ const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
 var textboxSubmitButton = document.getElementById("journalSubmitButton")
 var expandButton = document.getElementById("expandButton")
+var cornerButton = document.getElementById("cornerButton")
 
 var horribleButton = document.getElementById("horrible")
 var badButton = document.getElementById("bad")
@@ -18,6 +19,7 @@ var textbox = document.getElementById("notes")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
+var journalPage = document.getElementById("journalPage")
 
 var dateString;
 
@@ -30,8 +32,12 @@ var userData;
 
 //SWITCH PAGES
 function goToHomePage(){
-  title.textContent = dateString + " - Home"
+  for(var i = 0; i < headers.length; i++){
+    headers[i].style.display = 'block'
+  }
+  homePage.style.display = 'block'
   calendarPage.style.display = 'none'
+  journalPage.style.display = 'none'
 }
 
 function goToCalendarPage(){
@@ -39,6 +45,7 @@ function goToCalendarPage(){
     headers[i].style.display = 'none'
   }
   homePage.style.display = 'none'
+  journalPage.style.display = 'none'
   calendarPage.style.display = 'block'
 }
 
@@ -47,7 +54,8 @@ function goToJournalPage(){
     headers[i].style.display = 'none'
   }
   homePage.style.display = 'none'
-
+  calendarPage.style.display = 'none'
+  journalPage.style.display = 'block'
 }
 
 
@@ -136,18 +144,22 @@ function onJournalSubmit(){
 }
 
 function onJournalExpanded(){
-  goToCalendarPage()
+  goToJournalPage()
 }
 
 function onMoodPicked(moodId){
   editEntry(currentYear,currentMonth,currentDay,moodId)
 }
 
+function onCornerClicked(){
+  goToCalendarPage()
+}
 
 document.addEventListener("DOMContentLoaded", onPageLoaded);
 
 textboxSubmitButton.addEventListener("click", onJournalSubmit)
 expandButton.addEventListener("click", onJournalExpanded)
+cornerButton.addEventListener("click",onCornerClicked)
 
 horribleButton.addEventListener("click",function(){ onMoodPicked(0)})
 badButton.addEventListener("click",function(){ onMoodPicked(1)})
@@ -170,8 +182,6 @@ window.addEventListener("unload", function(){
  * @param  {Object} data User data requested from local computer storage
  * @return {null}
  */
-
-
 function init(data){
   if(data == ""){ //user has no data, generate them a blank data frame
     data = {}

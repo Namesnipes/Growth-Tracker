@@ -162,10 +162,8 @@ textarea{
   font-family: "Cousine", monospace;
 }
 #largeJournal{
-  display: block;
   width: 380px;
   margin: 0px auto;
-  display: none;
 }
 h4{
   margin-bottom: 1px;
