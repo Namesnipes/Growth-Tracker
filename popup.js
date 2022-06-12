@@ -7,7 +7,7 @@ var title = document.getElementById("currentDayHeader")
 var subtitle = document.getElementById("yearHeader")
 var textbox = document.getElementById("notes")
 
-var homePage = document.getElementById("content")
+var homePage = document.getElementById("HomeContent")
 
 var dateString;
 var yearNumber;
