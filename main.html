@@ -4,6 +4,7 @@
 </head>
 <body>
     <div id="content">
+      <!--today's date-->
       <h1 id="currentDayHeader" class="headers">Month Nth</h1>
       <h2 id="yearHeader" class="headers">year</h2>
       <!--Home page-->
@@ -28,12 +29,18 @@
           </div>
           <div class="clear"></div>
         </div>
-
+        <!--mini journal area-->
         <div id="miniJournal">
           <textarea id="notes" name="notes" rows="5" cols="34" maxlength="160" placeholder="My day..."></textarea>
           <div id="journalSubmitButton">save</div>
           <div id="expandButton">expand</div>
         </div>
+        <!--corner button - only on home page -->
+        <img id="cornerButton" src="assets/corner.png"/>
+      </div>
+
+      <div id="journalPage">
+        <textarea id="largeJournal" name="notes" rows="20" cols="34" placeholder="My day..."></textarea>
       </div>
 
       <div id="calendarPage">
@@ -470,6 +477,9 @@
           </tr>
         </table>
       </div>
+
+      <!-- TODO bottom buttons -->
+      <div id="buttons"></div>
     </div>
 
 </body>

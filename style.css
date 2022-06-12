@@ -27,6 +27,9 @@ p{
 #content{
   margin: 10px;
 }
+#HomeContent{
+  position: relative;
+}
 .headers{
   text-align: center;
 }
@@ -112,7 +115,7 @@ p{
   margin-top: 36px;
   text-align: center;
   visibility: hidden;
-  user-select: none;
+  user-select: none
 }
 textarea{
   resize: none;
@@ -128,6 +131,7 @@ textarea{
   display: block;
   width: 280px;
   margin: 0px auto;
+  height: 130px;
 }
 #expandButton{
   background-color: #58CCAD;
@@ -157,6 +161,12 @@ textarea{
   cursor: pointer;
   font-family: "Cousine", monospace;
 }
+#largeJournal{
+  display: block;
+  width: 380px;
+  margin: 0px auto;
+  display: none;
+}
 h4{
   margin-bottom: 1px;
   margin-top: 10px;
@@ -175,5 +185,17 @@ td{
   width: 12.2px;
   height: 12.2px;
   font-size: 5px;
-  background-color: #C6E5B7
+  background-color: #C6E5B7;
+}
+#buttons{
+  width: 380px;
+  height: 28px;
+}
+#cornerButton{
+  height: 30px;
+  width: auto;
+  position: absolute;
+  right: -10px;
+  bottom: -37px;
+  cursor: pointer;
 }
