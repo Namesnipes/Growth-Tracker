@@ -1,11 +1,11 @@
 body{
-  width: 325;
+  width: 400;
   height: 550;
   border: solid black 1px;
   background-color: #F3F1ED;
 }
 #content{
-  margin: 20px;
+  margin: 10px;
 }
 .headers{
   text-align: center;
@@ -105,8 +105,9 @@ textarea{
 #miniJournal{
   padding-top: 8px;
   display: block;
-  width: 216px;
+  width: 280px;
   margin: 0px auto;
+  background-color: red;
 }
 #expandButton{
   background-color: #58CCAD;
@@ -133,4 +134,18 @@ textarea{
   float: right;
   border-radius: 2px;
   cursor: pointer;
+}
+h4{
+  margin-bottom: 0px;
+}
+table{
+  background-color: yellow;
+  border-collapse: collapse;
+  width: 380px;
+}
+td{
+  border: 1px solid black;
+  width: 12.2px;
+  height: 12.2px;
+  font-size: 5px;
 }
