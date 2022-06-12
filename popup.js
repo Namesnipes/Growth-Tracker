@@ -4,6 +4,7 @@ const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 var textboxSubmitButton = document.getElementById("journalSubmitButton")
 var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
+var homeButton = document.getElementById("homeButton")
 
 var horribleButton = document.getElementById("horrible")
 var badButton = document.getElementById("bad")
@@ -155,11 +156,17 @@ function onCornerClicked(){
   goToCalendarPage()
 }
 
+function onHomeButtonClicked(){
+  goToHomePage()
+}
+
 document.addEventListener("DOMContentLoaded", onPageLoaded);
 
 textboxSubmitButton.addEventListener("click", onJournalSubmit)
 expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
+homeButton.addEventListener("click",onHomeButtonClicked)
+
 
 horribleButton.addEventListener("click",function(){ onMoodPicked(0)})
 badButton.addEventListener("click",function(){ onMoodPicked(1)})
