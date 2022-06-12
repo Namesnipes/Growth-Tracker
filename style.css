@@ -107,7 +107,6 @@ textarea{
   display: block;
   width: 280px;
   margin: 0px auto;
-  background-color: red;
 }
 #expandButton{
   background-color: #58CCAD;
@@ -148,4 +147,5 @@ td{
   width: 12.2px;
   height: 12.2px;
   font-size: 5px;
+  background-color: #C6E5B7
 }
