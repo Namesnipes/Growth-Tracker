@@ -234,3 +234,19 @@ td{
   margin-right: 10px;
   cursor: pointer;
 }
+#year{
+  font-family: "Calistoga", serif;
+  font-size: 18px;
+  display: block;
+  text-align: center;
+  width: 80px;
+  background-color: #58CCAD;
+  border-style: none;
+  border-radius: 2px;
+  height: 24px;
+}
+#yearChanger{
+  display: block;
+  width: 80px;
+  margin: 0px auto;
+}
