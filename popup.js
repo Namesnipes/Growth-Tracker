@@ -16,18 +16,19 @@ var greatButton = document.getElementById("great")
 var title = document.getElementById("currentDayHeader")
 var subtitle = document.getElementById("yearHeader")
 var headers = document.getElementsByClassName("headers")
-var textbox = document.getElementById("notes")
+var smallTextbox = document.getElementById("notes")
+var largeTextbox = document.getElementById("largeJournal")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
 var journalPage = document.getElementById("journalPage")
 
-var dateString;
 
 var now = new Date()
-var currentDay = now.getDate() // range: 1-31
-var currentMonth = now.getMonth() + 1 // range: 1-12
-var currentYear = now.getFullYear()
+var selectedDay = now.getDate() // range: 1-31
+var selectedMonth = now.getMonth() + 1 // range: 1-12
+var selectedYear = now.getFullYear()
+var dateString;
 
 var userData;
 
@@ -84,26 +85,26 @@ function getData(key,callback){
 //Helpers
 
 function saveTextBox(){
-  var text = textbox.value
+  var text = smallTextbox.value
   console.log("Saving: " + text)
   setData("text", text)
 }
 
 function updateTextBox(text){
-  textbox.value = text
+  smallTextbox.value = text
 }
 
-function updateDate(){
-  var now = new Date()
-  currentDay = now.getDate()
-  currentMonth = now.getMonth() + 1
-  currentYear = now.getFullYear()
-
-  var monthString = month[now.getMonth()]
-  dateString = monthString + " " + currentDay + nth(currentDay)
+function updateDate(year,monthNum,day){
+  console.log("changing selected day to: " + year + " " + monthNum + " " + day)
+  var now = new Date(year,monthNum,day)
+  selectedDay = now.getDate()
+  selectedMonth = now.getMonth()
+  selectedYear = now.getFullYear()
+  var monthString = month[monthNum-1]
+  dateString = monthString + " " + selectedDay + nth(selectedDay)
 
   title.textContent = dateString
-  subtitle.textContent = currentYear
+  subtitle.textContent = selectedYear
 
 }
 
@@ -119,6 +120,12 @@ function nth(i){
   if(i % 10 == 2) return "nd"
   if(i % 10 == 1) return "st"
   return "th"
+}
+
+function getDateFromElement(element){
+  d = element.className.replace( /[^\d.]/g, '' );
+  m = element.parentElement.parentElement.parentElement.id.replace( /[^\d.]/g, '' );
+  return [selectedYear,m,d]
 }
 
 function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
@@ -137,7 +144,7 @@ function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
 //EVENTS
 function onPageLoaded(){
   getData("text",updateTextBox)
-  updateDate()
+  updateDate(selectedYear,selectedMonth,selectedDay)
 }
 
 function onJournalSubmit(){
@@ -145,11 +152,12 @@ function onJournalSubmit(){
 }
 
 function onJournalExpanded(){
+  largeTextbox.value = smallTextbox.value
   goToJournalPage()
 }
 
 function onMoodPicked(moodId){
-  editEntry(currentYear,currentMonth,currentDay,moodId)
+  editEntry(selectedtYear,selectedMonth,selectedDay,moodId)
 }
 
 function onCornerClicked(){
@@ -158,6 +166,12 @@ function onCornerClicked(){
 
 function onHomeButtonClicked(){
   goToHomePage()
+}
+
+function onDateClicked(element){
+  var date = getDateFromElement(element)
+  updateDate(date[0],date[1],date[2])
+  goToJournalPage()
 }
 
 document.addEventListener("DOMContentLoaded", onPageLoaded);
@@ -181,6 +195,16 @@ window.addEventListener("unload", function(){
 
 //ON PAGE OPEN
 
+function makeDatesClickable(year){
+  for(var monthNum = 0; monthNum < month.length; monthNum++){
+    var monthDays = new Date(year,monthNum,0).getDate()
+    for(var dateNum = 0; dateNum < monthDays; dateNum++){
+      let element = document.querySelector("#month_" + (monthNum+1) + " .date_" + (dateNum+1))
+      element.addEventListener("click",function(){onDateClicked(element)})
+    }
+  }
+}
+
 /**
  * Populates the "userData" variable with an object containing dates and their corresponding journal entries and mood level
  * The data can be accessed like so: Object["Year"][MonthNumber-1][DateNumber-1]
@@ -192,7 +216,7 @@ window.addEventListener("unload", function(){
 function init(data){
   if(data == ""){ //user has no data, generate them a blank data frame
     data = {}
-    for(var year = currentYear-1; year <= currentYear + 1; year++){
+    for(var year = selectedYear-1; year <= selectedYear + 1; year++){
       data[year.toString()] = []
       for(var monthNum = 0; monthNum < month.length; monthNum++){
         daysInMonth = new Date(year,monthNum,0).getDate()
@@ -220,6 +244,7 @@ function init(data){
       }
     }
   }
+  makeDatesClickable(selectedYear)
 }
 
 getData("USER_DATA",init)
