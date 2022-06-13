@@ -65,6 +65,7 @@ function goToJournalPage(){
 
 
 function setData(key,value){
+  console.log("Setting:" + key + " to " + value)
   browser.storage.local.set({
     [key]: value
   });
@@ -86,12 +87,7 @@ function getData(key,callback){
 
 function saveTextBox(){
   var text = smallTextbox.value
-  console.log("Saving: " + text)
-  setData("text", text)
-}
-
-function updateTextBox(text){
-  smallTextbox.value = text
+  editEntry(selectedYear,selectedMonth,selectedDay,null,text)
 }
 
 function updateDate(year,monthNum,day){
@@ -128,22 +124,31 @@ function getDateFromElement(element){
   return [selectedYear,m,d]
 }
 
+function getEntry(yearNum,monthNum,dayNum){
+  if(!userData) console.error("User data is undefined, failed to retreive entry.")
+  return userData[yearNum.toString()][monthNum-1][dayNum-1]
+}
+
 function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
   console.log("Editing entry: " + yearNum + "-" + monthNum + "-" + dayNum + " Mood: " + moodId)
+  if(!userData) console.error("User data is undefined, failed to edit entry.")
   if(moodId !== null && moodId >= 0 && moodId <= 4){
     var element = document.querySelector("#month_" + monthNum + " .date_" + dayNum)
     element.style['background-color'] = moodColors[moodId]
     userData[yearNum.toString()][monthNum-1][dayNum-1].mood = moodId
   }
   if(journalText !== null){
-
+    userData[yearNum.toString()][monthNum-1][dayNum-1].entry = journalText
   }
 }
 
 
 //EVENTS
+function onDataLoaded(){
+  smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
+}
+
 function onPageLoaded(){
-  getData("text",updateTextBox)
   updateDate(selectedYear,selectedMonth,selectedDay)
 }
 
@@ -157,7 +162,7 @@ function onJournalExpanded(){
 }
 
 function onMoodPicked(moodId){
-  editEntry(selectedtYear,selectedMonth,selectedDay,moodId)
+  editEntry(selectedYear,selectedMonth,selectedDay,moodId)
 }
 
 function onCornerClicked(){
@@ -171,6 +176,7 @@ function onHomeButtonClicked(){
 function onDateClicked(element){
   var date = getDateFromElement(element)
   updateDate(date[0],date[1],date[2])
+  largeTextbox.value = getEntry(date[0],date[1],date[2]).entry
   goToJournalPage()
 }
 
@@ -193,7 +199,7 @@ window.addEventListener("unload", function(){
   console.log("bye")
 })
 
-//ON PAGE OPEN
+//INITIALIZING STUFF
 
 function makeDatesClickable(year){
   for(var monthNum = 0; monthNum < month.length; monthNum++){
@@ -214,6 +220,7 @@ function makeDatesClickable(year){
  * @return {null}
  */
 function init(data){
+  console.log("init")
   if(data == ""){ //user has no data, generate them a blank data frame
     data = {}
     for(var year = selectedYear-1; year <= selectedYear + 1; year++){
@@ -227,9 +234,9 @@ function init(data){
       }
     }
     setData("USER_DATA",data)
-    userData = data
+    loadData(data)
   } else {
-    userData = data
+    loadData(data)
     for(year in userData){
       for(var monthNum = 0; monthNum < month.length; monthNum++){
         var monthDays = userData[year][monthNum].length
@@ -245,6 +252,11 @@ function init(data){
     }
   }
   makeDatesClickable(selectedYear)
+}
+
+function loadData(data){
+  userData = data
+  onDataLoaded()
 }
 
 getData("USER_DATA",init)
