@@ -170,6 +170,8 @@ function onCornerClicked(){
 }
 
 function onHomeButtonClicked(){
+  var now = new Date()
+  updateDate(now.getFullYear(),now.getMonth()+1,now.getDate())
   goToHomePage()
 }
 
