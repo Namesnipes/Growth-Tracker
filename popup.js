@@ -18,6 +18,7 @@ var subtitle = document.getElementById("yearHeader")
 var headers = document.getElementsByClassName("headers")
 var smallTextbox = document.getElementById("notes")
 var largeTextbox = document.getElementById("largeJournal")
+var yearChanger = document.getElementById("yearChanger")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
@@ -40,6 +41,7 @@ function goToHomePage(){
   homePage.style.display = 'block'
   calendarPage.style.display = 'none'
   journalPage.style.display = 'none'
+  yearChanger.style.display = 'none'
 }
 
 function goToCalendarPage(){
@@ -49,6 +51,7 @@ function goToCalendarPage(){
   homePage.style.display = 'none'
   journalPage.style.display = 'none'
   calendarPage.style.display = 'block'
+  yearChanger.style.display = 'block'
 }
 
 function goToJournalPage(){
@@ -58,6 +61,7 @@ function goToJournalPage(){
   homePage.style.display = 'none'
   calendarPage.style.display = 'none'
   journalPage.style.display = 'block'
+  yearChanger.style.display = 'none'
 }
 
 
@@ -92,10 +96,10 @@ function saveTextBox(){
 
 function updateDate(year,monthNum,day){
   console.log("changing selected day to: " + year + " " + monthNum + " " + day)
-  var now = new Date(year,monthNum,day)
-  selectedDay = now.getDate()
-  selectedMonth = now.getMonth()
-  selectedYear = now.getFullYear()
+  var now = new Date(year + "-" + monthNum + "-" + day)
+  selectedDay = day
+  selectedMonth = monthNum
+  selectedYear = year
   var monthString = month[monthNum-1]
   dateString = monthString + " " + selectedDay + nth(selectedDay)
 
@@ -120,6 +124,7 @@ function nth(i){
 
 function getDateFromElement(element){
   d = element.className.replace( /[^\d.]/g, '' );
+  console.log(element.className + " " + d)
   m = element.parentElement.parentElement.parentElement.id.replace( /[^\d.]/g, '' );
   return [selectedYear,m,d]
 }
@@ -178,6 +183,7 @@ function onHomeButtonClicked(){
 function onDateClicked(element){
   var date = getDateFromElement(element)
   updateDate(date[0],date[1],date[2])
+  console.log(getEntry)
   largeTextbox.value = getEntry(date[0],date[1],date[2]).entry
   goToJournalPage()
 }
@@ -204,10 +210,11 @@ window.addEventListener("unload", function(){
 //INITIALIZING STUFF
 
 function makeDatesClickable(year){
-  for(var monthNum = 0; monthNum < month.length; monthNum++){
+  for(var monthNum = 1; monthNum <= month.length; monthNum++){
     var monthDays = new Date(year,monthNum,0).getDate()
-    for(var dateNum = 0; dateNum < monthDays; dateNum++){
-      let element = document.querySelector("#month_" + (monthNum+1) + " .date_" + (dateNum+1))
+    for(var dateNum = 1; dateNum <= monthDays; dateNum++){
+      let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
+      console.log(year + " " + monthNum + " " + monthDays)
       element.addEventListener("click",function(){onDateClicked(element)})
     }
   }
@@ -228,7 +235,7 @@ function init(data){
     for(var year = selectedYear-1; year <= selectedYear + 1; year++){
       data[year.toString()] = []
       for(var monthNum = 0; monthNum < month.length; monthNum++){
-        daysInMonth = new Date(year,monthNum,0).getDate()
+        daysInMonth = new Date(year,monthNum+1,0).getDate()
         data[year.toString()][monthNum] = []
         for(var dayNum = 0; dayNum < daysInMonth; dayNum++){
           data[year.toString()][monthNum][dayNum] = {"entry":null,"mood":null}
