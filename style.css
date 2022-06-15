@@ -118,7 +118,7 @@ p{
   margin-top: 36px;
   text-align: center;
   visibility: hidden;
-  user-select: none
+  user-select: none;
 }
 textarea{
   resize: none;
@@ -182,7 +182,6 @@ h4{
   display: none;
 }
 table{
-  background-color: yellow;
   border-collapse: collapse;
   width: 380px;
 }
@@ -256,14 +255,16 @@ td{
   display: block;
   width: 80px;
   margin: 0px auto;
+  display: none;
 }
 #todayWas{
   width: 360px;
   margin: 0px auto;
   height: 30px;
   padding-top: 8px;
+  padding-bottom: 10px;
 }
-#moodSentence{
+.moodSentence{
   float: left;
   line-height: 0px;
   margin-left: 5px;
@@ -278,8 +279,14 @@ td{
   margin: 5px;
   border-radius: 2px;
 }
+#sentence{
+  height: 30px;
+  width: 170px;
+  float: left;
+  display: none;
+}
 #journalButtons{
-  width: 80px;
+  width: 34px;
   height: 20px;
   margin: 5px;
   float: right;
@@ -297,16 +304,69 @@ td{
   font-family: "Cousine", monospace;
   float: right;
 }
-#edit{
-  background-color: #58CCAD;
-  font-size: 10px;
-  text-align: center;
-  line-height: 15px;
-  width: 30px;
-  height: 15px;
-  padding: 2px;
-  border-radius: 2px;
-  cursor: pointer;
-  font-family: "Cousine", monospace;
+#moodOptions{
+  height: 30px;
   float: left;
+}
+.miniMoods{
+  font-size: 9px;
+  margin-top: 25px;
+  text-align: center;
+  visibility: hidden;
+  user-select: none;
+}
+#miniAwful{
+  width: 20px;
+  height: 20px;
+  background-color: #0061A1;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniAwful:hover p{
+  visibility: visible;
+}
+#miniBad{
+  width: 20px;
+  height: 20px;
+  background-color: #15A0B0;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniBad:hover p{
+  visibility: visible;
+}
+#miniOk{
+  width: 20px;
+  height: 20px;
+  background-color: #58CCAD;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniOk:hover p{
+  visibility: visible;
+}
+#miniGood{
+  width: 20px;
+  height: 20px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniGood:hover p{
+  visibility: visible;
+}
+#miniGreat{
+  width: 20px;
+  height: 20px;
+  background-color: #9CD97E;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniGreat:hover p{
+  visibility: visible;
 }
