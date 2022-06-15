@@ -250,3 +250,56 @@ td{
   width: 80px;
   margin: 0px auto;
 }
+#todayWas{
+  width: 360px;
+  margin: 0px auto;
+  height: 30px;
+  padding-top: 8px;
+}
+#moodSentence{
+  float: left;
+  line-height: 0px;
+  margin-left: 5px;
+  margin-right: 8px;
+  font-style: italic;
+}
+#todayMood{
+  width: 20px;
+  height: 20px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#journalButtons{
+  width: 80px;
+  height: 20px;
+  margin: 5px;
+  float: right;
+}
+#save{
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  width: 30px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+  float: right;
+}
+#edit{
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  width: 30px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+  float: left;
+}
