@@ -20,6 +20,7 @@ var headers = document.getElementsByClassName("headers")
 var smallTextbox = document.getElementById("notes")
 var largeTextbox = document.getElementById("largeJournal")
 var yearChanger = document.getElementById("yearChanger")
+var dayPreview = document.getElementById("dayPreview")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
@@ -187,6 +188,8 @@ function onCornerClicked(){
 function onHomeButtonClicked(){
   var now = new Date()
   updateDate(now.getFullYear(),now.getMonth()+1,now.getDate())
+  var text = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate()).entry
+  smallTextbox.value = text
   goToHomePage()
 }
 
@@ -196,6 +199,15 @@ function onDateClicked(element){
   console.log(getEntry(date[0],date[1],date[2]))
   largeTextbox.value = getEntry(date[0],date[1],date[2]).entry
   goToJournalPage()
+}
+
+function onDateHover(element, left){
+  var date = getDateFromElement(element)
+  if(left){
+    dayPreview.textContent = ""
+  } else {
+    dayPreview.textContent = month[date[1]-1] + " " + date[2]
+  }
 }
 
 document.addEventListener("DOMContentLoaded", onPageLoaded);
@@ -226,6 +238,8 @@ function makeDatesClickable(year){
     for(var dateNum = 1; dateNum <= monthDays; dateNum++){
       let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
       element.addEventListener("click",function(){onDateClicked(element)})
+      element.addEventListener("mouseout", function(){onDateHover(element, true)})
+      element.addEventListener("mouseover", function(){onDateHover(element, false)})
     }
   }
 }
