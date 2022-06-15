@@ -1,7 +1,8 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
-var textboxSubmitButton = document.getElementById("journalSubmitButton")
+var smallJournalSaveButton = document.getElementById("journalSubmitButton")
+var bigJournalSaveButton = document.getElementById("save")
 var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
 var homeButton = document.getElementById("homeButton")
@@ -89,8 +90,13 @@ function getData(key,callback){
 
 //Helpers
 
-function saveTextBox(){
+function saveSmallTextBox(){
   var text = smallTextbox.value
+  editEntry(selectedYear,selectedMonth,selectedDay,null,text)
+}
+
+function saveBigTextBox(){
+  var text = largeTextbox.value
   editEntry(selectedYear,selectedMonth,selectedDay,null,text)
 }
 
@@ -135,7 +141,7 @@ function getEntry(yearNum,monthNum,dayNum){
 }
 
 function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
-  console.log("Editing entry: " + yearNum + "-" + monthNum + "-" + dayNum + " Mood: " + moodId)
+  console.log("Editing entry: " + yearNum + "-" + monthNum + "-" + dayNum + " Mood: " + moodId + " Journal: " + journalText)
   if(!userData) console.error("User data is undefined, failed to edit entry.")
   if(moodId !== null && moodId >= 0 && moodId <= 4){
     var element = document.querySelector("#month_" + monthNum + " .date_" + dayNum)
@@ -157,8 +163,12 @@ function onPageLoaded(){
   updateDate(selectedYear,selectedMonth,selectedDay)
 }
 
-function onJournalSubmit(){
-  saveTextBox()
+function onSmallJournalSubmit(){
+  saveSmallTextBox()
+}
+
+function onBigJournalSubmit(){
+  saveBigTextBox()
 }
 
 function onJournalExpanded(){
@@ -183,14 +193,15 @@ function onHomeButtonClicked(){
 function onDateClicked(element){
   var date = getDateFromElement(element)
   updateDate(date[0],date[1],date[2])
-  console.log(getEntry)
+  console.log(getEntry(date[0],date[1],date[2]))
   largeTextbox.value = getEntry(date[0],date[1],date[2]).entry
   goToJournalPage()
 }
 
 document.addEventListener("DOMContentLoaded", onPageLoaded);
 
-textboxSubmitButton.addEventListener("click", onJournalSubmit)
+smallJournalSaveButton.addEventListener("click", onSmallJournalSubmit)
+bigJournalSaveButton.addEventListener("click", onBigJournalSubmit)
 expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
@@ -214,7 +225,6 @@ function makeDatesClickable(year){
     var monthDays = new Date(year,monthNum,0).getDate()
     for(var dateNum = 1; dateNum <= monthDays; dateNum++){
       let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
-      console.log(year + " " + monthNum + " " + monthDays)
       element.addEventListener("click",function(){onDateClicked(element)})
     }
   }
@@ -229,7 +239,6 @@ function makeDatesClickable(year){
  * @return {null}
  */
 function init(data){
-  console.log("init")
   if(data == ""){ //user has no data, generate them a blank data frame
     data = {}
     for(var year = selectedYear-1; year <= selectedYear + 1; year++){
