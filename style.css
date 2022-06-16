@@ -11,11 +11,15 @@
   src: url("assets/Cousine-Italic.ttf");
   font-style: italic;
 }
+@keyframes buttonFade{
+  from{background-color: #58CCAD;}
+  to{background-color: #15A0B0;}
+}
 body{
   width: 400;
   height: 550;
   border: solid black 1px;
-  background-color: #F3F1ED;
+  background-color: #F1ECE3;
 }
 h1, h2, h3, h4{
   font-family: "Calistoga", serif;
@@ -64,6 +68,9 @@ p{
   margin: 5px;
   border-radius: 2px;
 }
+#horrible:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
 #horrible:hover p{
   visibility: visible;
 }
@@ -74,6 +81,9 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+}
+#bad:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
 }
 #bad:hover p{
   visibility: visible;
@@ -86,6 +96,9 @@ p{
   margin: 5px;
   border-radius: 2px;
 }
+#ok:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
 #ok:hover p{
   visibility: visible;
 }
@@ -97,6 +110,9 @@ p{
   margin: 5px;
   border-radius: 2px;
 }
+#good:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
 #good:hover p{
   visibility: visible;
 }
@@ -107,6 +123,9 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+}
+#great:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
 }
 #great:hover p{
   visibility: visible;
@@ -154,6 +173,11 @@ textarea{
   cursor: pointer;
   font-family: "Cousine", monospace;
 }
+#expandButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
 #journalSubmitButton{
   background-color: #58CCAD;
   font-size: 10px;
@@ -167,6 +191,11 @@ textarea{
   border-radius: 2px;
   cursor: pointer;
   font-family: "Cousine", monospace;
+}
+#journalSubmitButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
 }
 #journalPage{
   display: none;
@@ -216,6 +245,11 @@ td{
   margin-right: 10px;
   cursor: pointer;
 }
+#homeButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
 #helpIcon{
   height: 20px;
   width: auto;
@@ -230,6 +264,11 @@ td{
   margin-right: 10px;
   cursor: pointer;
 }
+#helpButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
 #calendarIcon{
   height: 20px;
   width: auto;
@@ -243,6 +282,11 @@ td{
   float: left;
   margin-right: 10px;
   cursor: pointer;
+}
+#cornerButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
 }
 #year{
   font-family: "Calistoga", serif;
@@ -308,6 +352,11 @@ td{
   font-family: "Cousine", monospace;
   float: right;
 }
+#save:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
 #moodOptions{
   height: 30px;
   float: left;
@@ -327,6 +376,9 @@ td{
   margin: 5px;
   border-radius: 2px;
 }
+#miniAwful:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
 #miniAwful:hover p{
   visibility: visible;
 }
@@ -337,6 +389,9 @@ td{
   float: left;
   margin: 5px;
   border-radius: 2px;
+}
+#miniBad:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
 }
 #miniBad:hover p{
   visibility: visible;
@@ -349,6 +404,9 @@ td{
   margin: 5px;
   border-radius: 2px;
 }
+#miniOk:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
 #miniOk:hover p{
   visibility: visible;
 }
@@ -360,6 +418,9 @@ td{
   margin: 5px;
   border-radius: 2px;
 }
+#miniGood:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
 #miniGood:hover p{
   visibility: visible;
 }
@@ -370,6 +431,9 @@ td{
   float: left;
   margin: 5px;
   border-radius: 2px;
+}
+#miniGreat:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
 }
 #miniGreat:hover p{
   visibility: visible;
