@@ -374,3 +374,9 @@ td{
 #miniGreat:hover p{
   visibility: visible;
 }
+#dayPreview{
+  font-family: "Calistoga", serif;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}

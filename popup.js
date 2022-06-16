@@ -255,7 +255,6 @@ expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 
-
 horribleButton.addEventListener("click",function(){ onMoodPicked(0)})
 badButton.addEventListener("click",function(){ onMoodPicked(1)})
 okButton.addEventListener("click",function(){ onMoodPicked(2)})
