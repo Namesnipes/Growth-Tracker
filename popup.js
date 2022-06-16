@@ -2,7 +2,9 @@ const month = ["January", "February", "March", "April", "May", "June", "July", "
 const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
 var smallJournalSaveButton = document.getElementById("journalSubmitButton")
-var bigJournalSaveButton = document.getElementById("save")
+var bigJournalSaveEditButton = document.getElementById("save")
+var journalEditState = false
+
 var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
 var homeButton = document.getElementById("homeButton")
@@ -12,6 +14,12 @@ var badButton = document.getElementById("bad")
 var okButton = document.getElementById("ok")
 var goodButton = document.getElementById("good")
 var greatButton = document.getElementById("great")
+
+var miniHorribleButton = document.getElementById("miniAwful")
+var miniBadButton = document.getElementById("miniBad")
+var miniOkButton = document.getElementById("miniOk")
+var miniGoodButton = document.getElementById("miniGood")
+var miniGreatButton = document.getElementById("miniGreat")
 
 
 var title = document.getElementById("currentDayHeader")
@@ -32,6 +40,7 @@ var selectedDay = now.getDate() // range: 1-31
 var selectedMonth = now.getMonth() + 1 // range: 1-12
 var selectedYear = now.getFullYear()
 var dateString;
+var selectedEntry;
 
 var userData;
 
@@ -154,6 +163,28 @@ function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
   }
 }
 
+function bigJournalChangeState(editting){
+  console.log("journal editting state: " + editting)
+  journalEditState = editting
+  if(editting){
+    largeTextbox.readOnly = true
+    bigJournalSaveEditButton.textContent = "edit"
+    document.getElementById("moodOptions").style.display = 'none'
+    document.getElementById("sentence").style.display = 'block'
+    var todaysMood = document.getElementById("todayMood")
+    if(selectedEntry.mood === null){
+      todaysMood.style.display = 'none'
+    } else {
+      document.querySelector('#sentence .moodSentence').textContent = "Today was"
+      todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
+    }
+  } else {
+    largeTextbox.readOnly = false
+    bigJournalSaveEditButton.textContent = "save"
+    document.getElementById("moodOptions").style.display = 'block'
+    document.getElementById("sentence").style.display = 'none'
+  }
+}
 
 //EVENTS
 function onDataLoaded(){
@@ -169,7 +200,11 @@ function onSmallJournalSubmit(){
 }
 
 function onBigJournalSubmit(){
-  saveBigTextBox()
+  if(journalEditState){
+    bigJournalChangeState(false)
+  } else {
+    saveBigTextBox()
+  }
 }
 
 function onJournalExpanded(){
@@ -186,10 +221,10 @@ function onCornerClicked(){
 }
 
 function onHomeButtonClicked(){
-  var now = new Date()
+  var now = new Date() //TODO: Dont use this dumb built in date function
   updateDate(now.getFullYear(),now.getMonth()+1,now.getDate())
-  var text = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate()).entry
-  smallTextbox.value = text
+  selectedEntry = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate())
+  smallTextbox.value = selectedEntry.entry
   goToHomePage()
 }
 
@@ -197,7 +232,9 @@ function onDateClicked(element){
   var date = getDateFromElement(element)
   updateDate(date[0],date[1],date[2])
   console.log(getEntry(date[0],date[1],date[2]))
-  largeTextbox.value = getEntry(date[0],date[1],date[2]).entry
+  selectedEntry = getEntry(date[0],date[1],date[2])
+  largeTextbox.value = selectedEntry.entry
+  bigJournalChangeState(true)
   goToJournalPage()
 }
 
@@ -213,7 +250,7 @@ function onDateHover(element, left){
 document.addEventListener("DOMContentLoaded", onPageLoaded);
 
 smallJournalSaveButton.addEventListener("click", onSmallJournalSubmit)
-bigJournalSaveButton.addEventListener("click", onBigJournalSubmit)
+bigJournalSaveEditButton.addEventListener("click", onBigJournalSubmit)
 expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
@@ -224,6 +261,12 @@ badButton.addEventListener("click",function(){ onMoodPicked(1)})
 okButton.addEventListener("click",function(){ onMoodPicked(2)})
 goodButton.addEventListener("click",function(){ onMoodPicked(3)})
 greatButton.addEventListener("click",function(){ onMoodPicked(4)})
+
+miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
+miniBadButton.addEventListener("click",function(){ onMoodPicked(1)})
+miniOkButton.addEventListener("click",function(){ onMoodPicked(2)})
+miniGoodButton.addEventListener("click",function(){ onMoodPicked(3)})
+miniGreatButton.addEventListener("click",function(){ onMoodPicked(4)})
 
 window.addEventListener("unload", function(){
   setData("USER_DATA",userData)
