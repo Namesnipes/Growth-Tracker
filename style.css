@@ -43,11 +43,15 @@ p{
   margin-bottom: 0px;
   margin-top: 0px;
 }
-.moodImage{
-  height: 215px;
+#image{
+  height: 220px;
   width: auto;
   display: block;
   margin: 0px auto;
+  background-image: url("assets/ok.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .clear{
   clear: both;
