@@ -207,6 +207,7 @@ function onBigJournalSubmit(){
     bigJournalChangeState(false)
   } else {
     saveBigTextBox()
+    bigJournalChangeState(true)
   }
 }
 
