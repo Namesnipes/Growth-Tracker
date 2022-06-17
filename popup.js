@@ -140,7 +140,6 @@ function nth(i){
 
 function getDateFromElement(element){
   d = element.className.replace( /[^\d.]/g, '' );
-  console.log(element.className + " " + d)
   m = element.parentElement.parentElement.parentElement.id.replace( /[^\d.]/g, '' );
   return [selectedYear,m,d]
 }
@@ -173,8 +172,10 @@ function bigJournalChangeState(editting){
     document.getElementById("sentence").style.display = 'block'
     var todaysMood = document.getElementById("todayMood")
     if(selectedEntry.mood === null){
+      document.querySelector('#sentence .moodSentence').textContent = "Today was ___"
       todaysMood.style.display = 'none'
     } else {
+      todaysMood.style.display = 'block'
       document.querySelector('#sentence .moodSentence').textContent = "Today was"
       todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
     }
@@ -231,7 +232,6 @@ function onHomeButtonClicked(){
 function onDateClicked(element){
   var date = getDateFromElement(element)
   updateDate(date[0],date[1],date[2])
-  console.log(getEntry(date[0],date[1],date[2]))
   selectedEntry = getEntry(date[0],date[1],date[2])
   largeTextbox.value = selectedEntry.entry
   bigJournalChangeState(true)
