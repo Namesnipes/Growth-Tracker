@@ -1,4 +1,5 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const imgs = ["","","./assets/ok.png","./assets/good.png","./assets/great.png"]
 const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
 var smallJournalSaveButton = document.getElementById("journalSubmitButton")
@@ -14,6 +15,7 @@ var badButton = document.getElementById("bad")
 var okButton = document.getElementById("ok")
 var goodButton = document.getElementById("good")
 var greatButton = document.getElementById("great")
+var buttons = [horribleButton,badButton,okButton,goodButton,greatButton]
 
 var miniHorribleButton = document.getElementById("miniAwful")
 var miniBadButton = document.getElementById("miniBad")
@@ -29,6 +31,7 @@ var smallTextbox = document.getElementById("notes")
 var largeTextbox = document.getElementById("largeJournal")
 var yearChanger = document.getElementById("yearChanger")
 var dayPreview = document.getElementById("dayPreview")
+var moodImage = document.getElementById("image")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
@@ -49,6 +52,7 @@ function goToHomePage(){
   for(var i = 0; i < headers.length; i++){
     headers[i].style.display = 'block'
   }
+  dayPreview.style.display = 'none'
   homePage.style.display = 'block'
   calendarPage.style.display = 'none'
   journalPage.style.display = 'none'
@@ -59,6 +63,7 @@ function goToCalendarPage(){
   for(var i = 0; i < headers.length; i++){
     headers[i].style.display = 'none'
   }
+  dayPreview.style.display = 'block'
   homePage.style.display = 'none'
   journalPage.style.display = 'none'
   calendarPage.style.display = 'block'
@@ -69,6 +74,7 @@ function goToJournalPage(){
   for(var i = 0; i < headers.length; i++){
     headers[i].style.display = 'block'
   }
+  dayPreview.style.display = 'none'
   homePage.style.display = 'none'
   calendarPage.style.display = 'none'
   journalPage.style.display = 'block'
@@ -192,6 +198,7 @@ function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
   var now = new Date() //TODO: Dont use this dumb built in date function
   selectedEntry = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate())
+  moodImage.style['background-image'] = "url(" + imgs[selectedEntry.mood || 2] + ")"
 }
 
 function onPageLoaded(){
@@ -218,7 +225,20 @@ function onJournalExpanded(){
 }
 
 function onMoodPicked(moodId){
+  moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
   editEntry(selectedYear,selectedMonth,selectedDay,moodId)
+}
+
+function onMoodHover(moodId, leaving){
+  if(leaving){
+    if(selectedEntry.mood){
+      moodImage.style['background-image'] = "url(" + imgs[selectedEntry.mood] + ")"
+    } else {
+      moodImage.style['background-image'] = "url(" + imgs[2] + ")"
+    }
+  } else {
+    moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
+  }
 }
 
 function onCornerClicked(){
@@ -259,11 +279,12 @@ expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 
-horribleButton.addEventListener("click",function(){ onMoodPicked(0)})
-badButton.addEventListener("click",function(){ onMoodPicked(1)})
-okButton.addEventListener("click",function(){ onMoodPicked(2)})
-goodButton.addEventListener("click",function(){ onMoodPicked(3)})
-greatButton.addEventListener("click",function(){ onMoodPicked(4)})
+for(let i = 0; i < buttons.length; i++){
+  buttons[i].addEventListener("click",function(){onMoodPicked(i)})
+  buttons[i].addEventListener("mouseout", function(){onMoodHover(i, true)})
+  buttons[i].addEventListener("mouseover", function(){onMoodHover(i, false)})
+}
+
 
 miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
 miniBadButton.addEventListener("click",function(){ onMoodPicked(1)})
