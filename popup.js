@@ -190,6 +190,8 @@ function bigJournalChangeState(editting){
 //EVENTS
 function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
+  var now = new Date() //TODO: Dont use this dumb built in date function
+  selectedEntry = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate())
 }
 
 function onPageLoaded(){
@@ -210,6 +212,7 @@ function onBigJournalSubmit(){
 
 function onJournalExpanded(){
   largeTextbox.value = smallTextbox.value
+  bigJournalChangeState(true)
   goToJournalPage()
 }
 
