@@ -224,8 +224,10 @@ function onJournalExpanded(){
   goToJournalPage()
 }
 
-function onMoodPicked(moodId){
-  moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
+function onMoodPicked(moodId,isHome){
+  if(isHome){
+    moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
+  }
   editEntry(selectedYear,selectedMonth,selectedDay,moodId)
 }
 
@@ -280,17 +282,17 @@ cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 
 for(let i = 0; i < buttons.length; i++){
-  buttons[i].addEventListener("click",function(){onMoodPicked(i)})
+  buttons[i].addEventListener("click",function(){onMoodPicked(i,true)})
   buttons[i].addEventListener("mouseout", function(){onMoodHover(i, true)})
   buttons[i].addEventListener("mouseover", function(){onMoodHover(i, false)})
 }
 
 
-miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
-miniBadButton.addEventListener("click",function(){ onMoodPicked(1)})
-miniOkButton.addEventListener("click",function(){ onMoodPicked(2)})
-miniGoodButton.addEventListener("click",function(){ onMoodPicked(3)})
-miniGreatButton.addEventListener("click",function(){ onMoodPicked(4)})
+miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0,false)})
+miniBadButton.addEventListener("click",function(){ onMoodPicked(1,false)})
+miniOkButton.addEventListener("click",function(){ onMoodPicked(2,false)})
+miniGoodButton.addEventListener("click",function(){ onMoodPicked(3,false)})
+miniGreatButton.addEventListener("click",function(){ onMoodPicked(4,false)})
 
 window.addEventListener("unload", function(){
   setData("USER_DATA",userData)
