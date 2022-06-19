@@ -87,9 +87,13 @@ function goToJournalPage(){
 
 function setData(key,value){
   console.log("Setting:" + key + " to " + value)
+  var start = performance.now()
   browser.storage.local.set({
     [key]: value
-  });
+  }).then(() => {
+    var end = performance.now()
+    console.log(`Call to setData took ${end - start} milliseconds`)
+  })
 }
 
 function getData(key,callback){
@@ -158,14 +162,21 @@ function getEntry(yearNum,monthNum,dayNum){
 function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
   console.log("Editing entry: " + yearNum + "-" + monthNum + "-" + dayNum + " Mood: " + moodId + " Journal: " + journalText)
   if(!userData) console.error("User data is undefined, failed to edit entry.")
+
   if(moodId !== null && moodId >= 0 && moodId <= 4){
     var element = document.querySelector("#month_" + monthNum + " .date_" + dayNum)
     element.style['background-color'] = moodColors[moodId]
     userData[yearNum.toString()][monthNum-1][dayNum-1].mood = moodId
   }
+
+  if(journalText === ""){
+    userData[yearNum.toString()][monthNum-1][dayNum-1].entry = null
+    journalText = null
+  }
   if(journalText !== null){
     userData[yearNum.toString()][monthNum-1][dayNum-1].entry = journalText
   }
+  setData("USER_DATA",userData)
 }
 
 function bigJournalChangeState(editting){
