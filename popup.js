@@ -32,6 +32,7 @@ var largeTextbox = document.getElementById("largeJournal")
 var yearChanger = document.getElementById("yearChanger")
 var dayPreview = document.getElementById("dayPreview")
 var moodImage = document.getElementById("image")
+var yearDropdown = document.getElementById("year")
 
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
@@ -45,7 +46,7 @@ var selectedYear = now.getFullYear()
 var dateString;
 var selectedEntry;
 
-var userData;
+var userData = {};
 
 //SWITCH PAGES
 function goToHomePage(){
@@ -86,7 +87,7 @@ function goToJournalPage(){
 
 
 function setData(key,value){
-  console.log("Setting:" + key + " to " + value)
+  console.log("Setting:" + key + " to " + typeof(value) + " of length " + value.length)
   var start = performance.now()
   browser.storage.local.set({
     [key]: value
@@ -176,7 +177,7 @@ function editEntry(yearNum,monthNum,dayNum,moodId = null,journalText = null){
   if(journalText !== null){
     userData[yearNum.toString()][monthNum-1][dayNum-1].entry = journalText
   }
-  setData("USER_DATA",userData)
+  setData("USER_DATA_" + yearNum,userData[yearNum])
 }
 
 function bigJournalChangeState(editting){
@@ -284,7 +285,6 @@ function onDateHover(element, left){
   }
 }
 
-document.addEventListener("DOMContentLoaded", onPageLoaded);
 
 smallJournalSaveButton.addEventListener("click", onSmallJournalSubmit)
 bigJournalSaveEditButton.addEventListener("click", onBigJournalSubmit)
@@ -292,18 +292,24 @@ expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 
-for(let i = 0; i < buttons.length; i++){
-  buttons[i].addEventListener("click",function(){onMoodPicked(i,true)})
-  buttons[i].addEventListener("mouseout", function(){onMoodHover(i, true)})
-  buttons[i].addEventListener("mouseover", function(){onMoodHover(i, false)})
-}
-
 
 miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0,false)})
 miniBadButton.addEventListener("click",function(){ onMoodPicked(1,false)})
 miniOkButton.addEventListener("click",function(){ onMoodPicked(2,false)})
 miniGoodButton.addEventListener("click",function(){ onMoodPicked(3,false)})
 miniGreatButton.addEventListener("click",function(){ onMoodPicked(4,false)})
+
+for(let i = 0; i < buttons.length; i++){
+  buttons[i].addEventListener("click",function(){onMoodPicked(i,true)})
+  buttons[i].addEventListener("mouseout", function(){onMoodHover(i, true)})
+  buttons[i].addEventListener("mouseover", function(){onMoodHover(i, false)})
+}
+
+yearDropdown.addEventListener("change",function(event){
+  changeYear(event.target.value)
+})
+
+document.addEventListener("DOMContentLoaded", onPageLoaded);
 
 window.addEventListener("unload", function(){
   setData("USER_DATA",userData)
@@ -317,6 +323,12 @@ function makeDatesClickable(year){
     var monthDays = new Date(year,monthNum,0).getDate()
     for(var dateNum = 1; dateNum <= monthDays; dateNum++){
       let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
+      var moodId = userData[year][monthNum-1][dateNum-1].mood
+      if(moodId !== null && moodId >= 0 && moodId <= 4){
+        element.style['background-color'] = moodColors[moodId]
+      } else {
+        element.style['background-color'] = "#c6e5b7"
+      }
       element.addEventListener("click",function(){onDateClicked(element)})
       element.addEventListener("mouseout", function(){onDateHover(element, true)})
       element.addEventListener("mouseover", function(){onDateHover(element, false)})
@@ -332,43 +344,38 @@ function makeDatesClickable(year){
  * @param  {Object} data User data requested from local computer storage
  * @return {null}
  */
-function init(data){
-  if(data == ""){ //user has no data, generate them a blank data frame
-    data = {}
-    for(var year = selectedYear-1; year <= selectedYear + 1; year++){
-      data[year.toString()] = []
-      for(var monthNum = 0; monthNum < month.length; monthNum++){
-        daysInMonth = new Date(year,monthNum+1,0).getDate()
-        data[year.toString()][monthNum] = []
-        for(var dayNum = 0; dayNum < daysInMonth; dayNum++){
-          data[year.toString()][monthNum][dayNum] = {"entry":null,"mood":null}
-        }
-      }
-    }
-    setData("USER_DATA",data)
-    loadData(data)
+
+function changeYear(year){
+  year = year.toString()
+  selectedYear = year
+  if(userData[year]){ // data exists in variable
+    makeDatesClickable(year)
+    onDataLoaded()
   } else {
-    loadData(data)
-    for(year in userData){
-      for(var monthNum = 0; monthNum < month.length; monthNum++){
-        var monthDays = userData[year][monthNum].length
-        for(var dateNum = 0; dateNum < monthDays; dateNum++){
-          var dateEntry = userData[year][monthNum][dateNum]
-          var moodId = dateEntry.mood
-          var journalEntry = dateEntry.entry
-          if(moodId !== null || journalEntry !== null){
-            editEntry(parseInt(year),monthNum+1,dateNum+1,moodId,journalEntry)
+    getData("USER_DATA_" + year,dataReceived)
+
+    function dataReceived(data){
+      if(data == ""){ // no previously saved data
+        yearData = [];
+        for(var monthNum = 0; monthNum < month.length; monthNum++){
+          daysInMonth = new Date(year,monthNum+1,0).getDate()
+          yearData[monthNum] = []
+          for(var dayNum = 0; dayNum < daysInMonth; dayNum++){
+            yearData[monthNum][dayNum] = {"entry":null,"mood":null}
           }
         }
+        setData("USER_DATA_" + year,yearData)
+        userData[year] = yearData;
+        makeDatesClickable(year)
+        onDataLoaded()
+      } else {
+        userData[year] = data;
+        makeDatesClickable(year)
+        onDataLoaded()
       }
     }
+
   }
-  makeDatesClickable(selectedYear)
 }
 
-function loadData(data){
-  userData = data
-  onDataLoaded()
-}
-
-getData("USER_DATA",init)
+changeYear(selectedYear)
