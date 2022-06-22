@@ -269,7 +269,7 @@ function onHomeButtonClicked(){
 
 function onDateClicked(element){
   var date = getDateFromElement(element)
-  updateDate(date[0],date[1],date[2])
+  updateDate(yearDropdown.options[yearDropdown.selectedIndex].text,date[1],date[2])
   selectedEntry = getEntry(date[0],date[1],date[2])
   largeTextbox.value = selectedEntry.entry
   bigJournalChangeState(true)
