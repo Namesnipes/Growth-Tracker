@@ -319,19 +319,29 @@ window.addEventListener("unload", function(){
 //INITIALIZING STUFF
 
 function makeDatesClickable(year){
+  var today = new Date()
+  today.setHours(23, 59, 59, 998);
+
   for(var monthNum = 1; monthNum <= month.length; monthNum++){
     var monthDays = new Date(year,monthNum,0).getDate()
-    for(var dateNum = 1; dateNum <= monthDays; dateNum++){
+    for(var dateNum = 1; dateNum <= 31; dateNum++){
       let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
-      var moodId = userData[year][monthNum-1][dateNum-1].mood
+      element.addEventListener("mouseout", function(){onDateHover(element, true)})
+      element.addEventListener("mouseover", function(){onDateHover(element, false)})
+
       if(moodId !== null && moodId >= 0 && moodId <= 4){
         element.style['background-color'] = moodColors[moodId]
+      } else if (new Date(selectedYear,monthNum-1,dateNum) > today){
+        element.style['background-color'] = "#969892"
+        continue
       } else {
         element.style['background-color'] = "#c6e5b7"
       }
-      element.addEventListener("click",function(){onDateClicked(element)})
-      element.addEventListener("mouseout", function(){onDateHover(element, true)})
-      element.addEventListener("mouseover", function(){onDateHover(element, false)})
+
+      if(dateNum < monthDays){
+        var moodId = userData[year][monthNum-1][dateNum-1].mood
+        element.addEventListener("click",function(){onDateClicked(element)})
+      }
     }
   }
 }
