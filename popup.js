@@ -1,5 +1,5 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-const imgs = ["","","./assets/ok.png","./assets/good.png","./assets/great.png"]
+const imgs = ["./assets/awful.png","./assets/bad.png","./assets/ok.png","./assets/good.png","./assets/great.png"]
 const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
 var smallJournalSaveButton = document.getElementById("journalSubmitButton")
