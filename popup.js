@@ -239,13 +239,15 @@ function onJournalExpanded(){
 function onMoodPicked(moodId,isHome){
   if(isHome){
     moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
+    console.log(moodImage.style['background-image'])
   }
   editEntry(selectedYear,selectedMonth,selectedDay,moodId)
 }
 
 function onMoodHover(moodId, leaving){
   if(leaving){
-    if(selectedEntry.mood){
+    console.log("mood: " + selectedEntry.mood)
+    if(selectedEntry.mood <= 4 && selectedEntry.mood >= 0){
       moodImage.style['background-image'] = "url(" + imgs[selectedEntry.mood] + ")"
     } else {
       moodImage.style['background-image'] = "url(" + imgs[2] + ")"
