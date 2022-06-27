@@ -334,7 +334,7 @@ function makeDatesClickable(year){
       if(moodId !== null && moodId >= 0 && moodId <= 4){
         element.style['background-color'] = moodColors[moodId]
       } else if (new Date(selectedYear,monthNum-1,dateNum) > today){
-        element.style['background-color'] = "#969892"
+        element.style['background-color'] = "#C7B89F"
         continue
       } else {
         element.style['background-color'] = "#c6e5b7"
