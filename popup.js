@@ -320,7 +320,7 @@ window.addEventListener("unload", function(){
 
 //INITIALIZING STUFF
 
-function makeDatesClickable(year){
+function setupPage(year){
   var today = new Date()
   today.setHours(23, 59, 59, 998);
 
@@ -331,9 +331,7 @@ function makeDatesClickable(year){
       element.addEventListener("mouseout", function(){onDateHover(element, true)})
       element.addEventListener("mouseover", function(){onDateHover(element, false)})
 
-      if(moodId !== null && moodId >= 0 && moodId <= 4){
-        element.style['background-color'] = moodColors[moodId]
-      } else if (new Date(selectedYear,monthNum-1,dateNum) > today){
+      if (new Date(selectedYear,monthNum-1,dateNum) > today){
         element.style['background-color'] = "#C7B89F"
         continue
       } else {
@@ -342,6 +340,7 @@ function makeDatesClickable(year){
 
       if(dateNum < monthDays){
         var moodId = userData[year][monthNum-1][dateNum-1].mood
+        if(moodId >= 0 && moodId <= 4) element.style['background-color'] = moodColors[moodId]
         element.addEventListener("click",function(){onDateClicked(element)})
       }
     }
@@ -361,7 +360,7 @@ function changeYear(year){
   year = year.toString()
   selectedYear = year
   if(userData[year]){ // data exists in variable
-    makeDatesClickable(year)
+    setupPage(year)
     onDataLoaded()
   } else {
     getData("USER_DATA_" + year,dataReceived)
@@ -378,11 +377,11 @@ function changeYear(year){
         }
         setData("USER_DATA_" + year,yearData)
         userData[year] = yearData;
-        makeDatesClickable(year)
+        setupPage(year)
         onDataLoaded()
       } else {
         userData[year] = data;
-        makeDatesClickable(year)
+        setupPage(year)
         onDataLoaded()
       }
     }
