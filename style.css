@@ -18,8 +18,10 @@
 body{
   width: 400;
   height: 550;
-  border: solid black 1px;
   background-color: #F1ECE3;
+  background-image: url("assets/bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 h1, h2, h3, h4{
   font-family: "Calistoga", serif;
@@ -35,6 +37,7 @@ p{
 }
 #HomeContent{
   position: relative;
+  margin: 0px;
 }
 .headers{
   text-align: center;
@@ -48,7 +51,7 @@ p{
   margin-top: 0px;
 }
 #image{
-  height: 230px;
+  height: 255px;
   width: auto;
   display: block;
   margin: 0px auto;
@@ -67,6 +70,7 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 #horrible:hover{
   box-shadow: 0px 0px 0px 3px #C7B89F;
@@ -81,6 +85,7 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 #bad:hover{
   box-shadow: 0px 0px 0px 3px #C7B89F;
@@ -95,6 +100,7 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 #ok:hover{
   box-shadow: 0px 0px 0px 3px #C7B89F;
@@ -109,6 +115,7 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 #good:hover{
   box-shadow: 0px 0px 0px 3px #C7B89F;
@@ -123,6 +130,7 @@ p{
   float: left;
   margin: 5px;
   border-radius: 2px;
+  cursor: pointer;
 }
 #great:hover{
   box-shadow: 0px 0px 0px 3px #C7B89F;
@@ -154,10 +162,11 @@ textarea{
 }
 #miniJournal{
   padding-top: 8px;
+  padding-bottom: 4px;
   display: block;
   width: 280px;
   margin: 0px auto;
-  height: 130px;
+  height: 100px;
 }
 #expandButton{
   background-color: #58CCAD;
@@ -230,6 +239,7 @@ td{
   height: 24px;
   position: absolute;
   bottom: 0px;
+  margin: 0px;
 }
 #homeIcon{
   height: 20px;
