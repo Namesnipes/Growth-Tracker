@@ -21,6 +21,7 @@ body{
   background-color: #F1ECE3;
   background-image: url("assets/bg.png");
   background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
 }
 h1, h2, h3, h4{
