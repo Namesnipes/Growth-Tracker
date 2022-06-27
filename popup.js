@@ -210,7 +210,10 @@ function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
   var now = new Date() //TODO: Dont use this dumb built in date function
   selectedEntry = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate())
-  moodImage.style['background-image'] = "url(" + imgs[selectedEntry.mood || 2] + ")"
+  var moodToday = selectedEntry.mood === null ? 2 : selectedEntry.mood
+  moodImage.style['background-image'] = "url(" + imgs[moodToday] + ")"
+  buttons[moodToday].children[0].style.visibility = 'visible'
+  buttons[moodToday].style.boxShadow = "0px 0px 0px 3px #C7B89F";
 }
 
 function onPageLoaded(){
@@ -239,7 +242,13 @@ function onJournalExpanded(){
 function onMoodPicked(moodId,isHome){
   if(isHome){
     moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
-    console.log(moodImage.style['background-image'])
+    var button = buttons[moodId]
+    for(const i in buttons){
+      buttons[i].style.boxShadow = null;
+      buttons[i].children[0].style.visibility = null
+    }
+    button.children[0].style.visibility = 'visible'
+    button.style.boxShadow = "0px 0px 0px 3px #C7B89F";
   }
   editEntry(selectedYear,selectedMonth,selectedDay,moodId)
 }
