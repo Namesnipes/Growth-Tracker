@@ -349,7 +349,7 @@ function setupPage(year){
 
       if(dateNum < monthDays){
         var moodId = userData[year][monthNum-1][dateNum-1].mood
-        if(moodId >= 0 && moodId <= 4) element.style['background-color'] = moodColors[moodId]
+        if(moodId !== null && moodId >= 0 && moodId <= 4) element.style['background-color'] = moodColors[moodId]
         element.addEventListener("click",function(){onDateClicked(element)})
       }
     }
