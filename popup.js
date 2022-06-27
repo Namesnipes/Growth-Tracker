@@ -337,7 +337,7 @@ function makeDatesClickable(year){
         element.style['background-color'] = "#C7B89F"
         continue
       } else {
-        element.style['background-color'] = "#c6e5b7"
+        element.style['background-color'] = "#F1ECE3"
       }
 
       if(dateNum < monthDays){
