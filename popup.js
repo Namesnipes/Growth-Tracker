@@ -205,6 +205,10 @@ function bigJournalChangeState(editting){
   }
 }
 
+function smallJournalChangeState(editting){
+
+}
+
 //EVENTS
 function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
@@ -239,8 +243,8 @@ function onJournalExpanded(){
   goToJournalPage()
 }
 
-function onMoodPicked(moodId,isHome){
-  if(isHome){
+function onMoodPicked(moodId){
+  if(selectedDay == new Date().getDate()){
     moodImage.style['background-image'] = "url(" + imgs[moodId] + ")"
     var button = buttons[moodId]
     for(const i in buttons){
@@ -304,16 +308,16 @@ cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 
 
-miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0,false)})
-miniBadButton.addEventListener("click",function(){ onMoodPicked(1,false)})
-miniOkButton.addEventListener("click",function(){ onMoodPicked(2,false)})
-miniGoodButton.addEventListener("click",function(){ onMoodPicked(3,false)})
-miniGreatButton.addEventListener("click",function(){ onMoodPicked(4,false)})
+miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
+miniBadButton.addEventListener("click",function(){ onMoodPicked(1)})
+miniOkButton.addEventListener("click",function(){ onMoodPicked(2)})
+miniGoodButton.addEventListener("click",function(){ onMoodPicked(3)})
+miniGreatButton.addEventListener("click",function(){ onMoodPicked(4)})
 
 for(let i = 0; i < buttons.length; i++){
-  buttons[i].addEventListener("click",function(){onMoodPicked(i,true)})
-  buttons[i].addEventListener("mouseout", function(){onMoodHover(i, true)})
-  buttons[i].addEventListener("mouseover", function(){onMoodHover(i, false)})
+  buttons[i].addEventListener("click",function(){onMoodPicked(i)})
+  buttons[i].addEventListener("mouseout", function(){onMoodHover(i)})
+  buttons[i].addEventListener("mouseover", function(){onMoodHover(i)})
 }
 
 yearDropdown.addEventListener("change",function(event){
