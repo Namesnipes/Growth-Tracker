@@ -165,9 +165,13 @@ textarea{
   padding-top: 8px;
   padding-bottom: 4px;
   display: block;
-  width: 280px;
+  width: 270px;
   margin: 0px auto;
   height: 100px;
+}
+#notes{
+  width: 270px;
+  height: 80px;
 }
 #expandButton{
   background-color: #58CCAD;
@@ -215,6 +219,7 @@ textarea{
   display: block;
   width: 360px;
   margin: 0px auto;
+  height: 360px;
 }
 h4{
   margin-bottom: 1px;
@@ -340,7 +345,7 @@ td{
 }
 #sentence{
   height: 30px;
-  width: 170px;
+  width: 250px;
   float: left;
   display: none;
 }
