@@ -1,5 +1,6 @@
 const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const imgs = ["./assets/awful.png","./assets/bad.png","./assets/ok.png","./assets/good.png","./assets/great.png"]
+const feelings = ['awful','bad','ok','good','great']
 const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 
 var smallJournalSaveButton = document.getElementById("journalSubmitButton")
@@ -194,7 +195,7 @@ function bigJournalChangeState(editting){
       todaysMood.style.display = 'none'
     } else {
       todaysMood.style.display = 'block'
-      document.querySelector('#sentence .moodSentence').textContent = "Today was"
+      document.querySelector('#sentence .moodSentence').textContent = "Today was " + feelings[selectedEntry.mood]
       todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
     }
   } else {
