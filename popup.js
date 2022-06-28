@@ -316,8 +316,8 @@ miniGreatButton.addEventListener("click",function(){ onMoodPicked(4)})
 
 for(let i = 0; i < buttons.length; i++){
   buttons[i].addEventListener("click",function(){onMoodPicked(i)})
-  buttons[i].addEventListener("mouseout", function(){onMoodHover(i)})
-  buttons[i].addEventListener("mouseover", function(){onMoodHover(i)})
+  buttons[i].addEventListener("mouseout", function(){onMoodHover(i,true)})
+  buttons[i].addEventListener("mouseover", function(){onMoodHover(i,false)})
 }
 
 yearDropdown.addEventListener("change",function(event){
