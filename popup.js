@@ -331,8 +331,9 @@ function onDateHover(element, left){
   if(left){
     dayPreview.textContent = ""
     element.style.boxShadow = null;
+    element.style['z-index'] = -1;
   } else {
-    element.style.boxShadow = "0px 0px 0px 3px #C7B89F";
+    element.style.boxShadow = "0px 0px 0px 10px RGB(0,0,0,0.2) inset";
     dayPreview.textContent = month[date[1]-1] + " " + date[2]
   }
 }
