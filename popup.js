@@ -378,8 +378,10 @@ function setupPage(year){
 
       if (new Date(selectedYear,monthNum-1,dateNum) > today){
         element.style['background-color'] = "#C7B89F"
+        element.style['cursor'] = "not-allowed"
       } else {
         element.style['background-color'] = "#F1ECE3"
+        element.style['cursor'] = "pointer"
         var moodId = userData[year][monthNum-1][dateNum-1].mood
         if(moodId !== null && moodId >= 0 && moodId <= 4) element.style['background-color'] = moodColors[moodId]
         element.addEventListener("click",function(){onDateClicked(element)})
