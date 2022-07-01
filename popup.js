@@ -6,6 +6,7 @@ const moodColors = ["#0061A1","#15A0B0","#58CCAD","#62B378","#9CD97E"]
 var smallJournalSaveButton = document.getElementById("journalSubmitButton")
 var bigJournalSaveEditButton = document.getElementById("save")
 var journalEditState = false
+var journalEditState2 = false
 
 var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
@@ -207,7 +208,28 @@ function bigJournalChangeState(editting){
 }
 
 function smallJournalChangeState(editting){
-
+  console.log("journal SMALL editting state: " + editting)
+  journalEditState2 = editting
+  if(editting){
+    smallTextBox.readOnly = true
+    smallJournalSaveButton.textContent = "edit"
+    document.getElementById("moodOptions").style.display = 'none'
+    document.getElementById("sentence").style.display = 'block'
+    var todaysMood = document.getElementById("todayMood")
+    if(selectedEntry.mood === null){
+      document.querySelector('#sentence .moodSentence').textContent = "Today was ___"
+      todaysMood.style.display = 'none'
+    } else {
+      todaysMood.style.display = 'block'
+      document.querySelector('#sentence .moodSentence').textContent = "Today was " + feelings[selectedEntry.mood]
+      todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
+    }
+  } else {
+    largeTextbox.readOnly = false
+    bigJournalSaveEditButton.textContent = "save"
+    document.getElementById("moodOptions").style.display = 'block'
+    document.getElementById("sentence").style.display = 'none'
+  }
 }
 
 //EVENTS
@@ -284,7 +306,10 @@ function onHomeButtonClicked(){
 }
 
 function onDateClicked(element){
+  var today = new Date()
+  today.setHours(23, 59, 59, 998);
   var date = getDateFromElement(element)
+  if(new Date(date[0],date[1]-1,date[2]) > today) return
   updateDate(yearDropdown.options[yearDropdown.selectedIndex].text,date[1],date[2])
   selectedEntry = getEntry(date[0],date[1],date[2])
   largeTextbox.value = selectedEntry.entry
@@ -342,17 +367,19 @@ function setupPage(year){
     var monthDays = new Date(year,monthNum,0).getDate()
     for(var dateNum = 1; dateNum <= 31; dateNum++){
       let element = document.querySelector("#month_" + (monthNum) + " .date_" + (dateNum))
+      if(dateNum > monthDays){
+        element.style['background-color'] = "transparent"
+        element.style['border'] = "none"
+        continue
+      }
+
       element.addEventListener("mouseout", function(){onDateHover(element, true)})
       element.addEventListener("mouseover", function(){onDateHover(element, false)})
 
       if (new Date(selectedYear,monthNum-1,dateNum) > today){
         element.style['background-color'] = "#C7B89F"
-        continue
       } else {
         element.style['background-color'] = "#F1ECE3"
-      }
-
-      if(dateNum < monthDays){
         var moodId = userData[year][monthNum-1][dateNum-1].mood
         if(moodId !== null && moodId >= 0 && moodId <= 4) element.style['background-color'] = moodColors[moodId]
         element.addEventListener("click",function(){onDateClicked(element)})
@@ -378,7 +405,6 @@ function changeYear(year){
     onDataLoaded()
   } else {
     getData("USER_DATA_" + year,dataReceived)
-
     function dataReceived(data){
       if(data == ""){ // no previously saved data
         yearData = [];
@@ -399,8 +425,13 @@ function changeYear(year){
         onDataLoaded()
       }
     }
-
   }
 }
 
+for(var i = 2022; i <= now.getFullYear()+1; i++){
+  var e = document.createElement("option")
+  e.value = i.toString()
+  e.textContent = i.toString()
+  yearDropdown.appendChild(e)
+}
 changeYear(selectedYear)
