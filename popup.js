@@ -252,6 +252,7 @@ function onPageLoaded(){
 }
 
 function onSmallJournalSubmit(){
+  if(!journalEditState2) saveSmallTextBox()
   if(smallTextbox.value == ""){
     smallJournalChangeState(false)
   } else {
