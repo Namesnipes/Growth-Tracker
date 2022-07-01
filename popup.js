@@ -186,7 +186,9 @@ function bigJournalChangeState(editting){
   console.log("journal editting state: " + editting)
   journalEditState = editting
   if(editting){
-    largeTextbox.readOnly = true
+    //largeTextbox.readOnly = true
+    largeTextbox.disabled = true
+    largeTextbox.style['cursor'] = "not-allowed"
     bigJournalSaveEditButton.textContent = "edit"
     document.getElementById("moodOptions").style.display = 'none'
     document.getElementById("sentence").style.display = 'block'
@@ -200,7 +202,9 @@ function bigJournalChangeState(editting){
       todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
     }
   } else {
-    largeTextbox.readOnly = false
+    //largeTextbox.readOnly = false
+    largeTextbox.disabled = false
+    largeTextbox.style['cursor'] = "text"
     bigJournalSaveEditButton.textContent = "save"
     document.getElementById("moodOptions").style.display = 'block'
     document.getElementById("sentence").style.display = 'none'
@@ -208,33 +212,26 @@ function bigJournalChangeState(editting){
 }
 
 function smallJournalChangeState(editting){
-  console.log("journal SMALL editting state: " + editting)
   journalEditState2 = editting
   if(editting){
-    smallTextBox.readOnly = true
+    smallTextbox.disabled = true
+    smallTextbox.style['cursor'] = "not-allowed"
     smallJournalSaveButton.textContent = "edit"
-    document.getElementById("moodOptions").style.display = 'none'
-    document.getElementById("sentence").style.display = 'block'
-    var todaysMood = document.getElementById("todayMood")
-    if(selectedEntry.mood === null){
-      document.querySelector('#sentence .moodSentence').textContent = "Today was ___"
-      todaysMood.style.display = 'none'
-    } else {
-      todaysMood.style.display = 'block'
-      document.querySelector('#sentence .moodSentence').textContent = "Today was " + feelings[selectedEntry.mood]
-      todaysMood.style['background-color'] = moodColors[selectedEntry.mood]
-    }
   } else {
-    largeTextbox.readOnly = false
-    bigJournalSaveEditButton.textContent = "save"
-    document.getElementById("moodOptions").style.display = 'block'
-    document.getElementById("sentence").style.display = 'none'
+    smallTextbox.disabled = false
+    smallTextbox.style['cursor'] = "text"
+    smallJournalSaveButton.textContent = "save"
   }
 }
 
 //EVENTS
 function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
+  if(smallTextbox.value === ""){
+    smallJournalChangeState(false)
+  } else {
+    smallJournalChangeState(true)
+  }
   var now = new Date() //TODO: Dont use this dumb built in date function
   selectedEntry = getEntry(now.getFullYear(),now.getMonth()+1,now.getDate())
   var moodToday = selectedEntry.mood === null ? 2 : selectedEntry.mood
@@ -244,11 +241,22 @@ function onDataLoaded(){
 }
 
 function onPageLoaded(){
+  for(var i = 2022; i <= now.getFullYear()+1; i++){
+    var e = document.createElement("option")
+    e.value = i.toString()
+    e.textContent = i.toString()
+    yearDropdown.appendChild(e)
+  }
+  smallJournalChangeState(true)
   updateDate(selectedYear,selectedMonth,selectedDay)
 }
 
 function onSmallJournalSubmit(){
-  saveSmallTextBox()
+  if(smallTextbox.value == ""){
+    smallJournalChangeState(false)
+  } else {
+    smallJournalChangeState(!journalEditState2)
+  }
 }
 
 function onBigJournalSubmit(){
@@ -428,12 +436,5 @@ function changeYear(year){
       }
     }
   }
-}
-
-for(var i = 2022; i <= now.getFullYear()+1; i++){
-  var e = document.createElement("option")
-  e.value = i.toString()
-  e.textContent = i.toString()
-  yearDropdown.appendChild(e)
 }
 changeYear(selectedYear)
