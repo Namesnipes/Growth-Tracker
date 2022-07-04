@@ -1,8 +1,8 @@
 {
 
-  "description": "Lovely journal and mood tracker extension",
+  "description": "Plant themed journal and mood tracker!",
   "manifest_version": 2,
-  "name": "Moodify",
+  "name": "Growth Tracker",
   "version": "0.1",
   "permissions": [
   "storage"
@@ -19,7 +19,7 @@
   },
   "browser_action": {
     "default_popup": "main.html",
-    "default_title": "Moodify"
+    "default_title": "Growth Tracker"
   }
 
 }
