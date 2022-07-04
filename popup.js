@@ -12,6 +12,7 @@ var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
 var homeButton = document.getElementById("homeButton")
 var helpButton = document.getElementById("helpButton")
+var exportButton = document.getElementById("exportButton")
 
 var horribleButton = document.getElementById("horrible")
 var badButton = document.getElementById("bad")
@@ -101,11 +102,11 @@ function toggleQuestionMark(){
 
 function setData(key,value){
   console.log("Setting:" + key + " to " + typeof(value) + " of length " + value.length)
-  var start = performance.now()
+  let start = performance.now()
   browser.storage.local.set({
     [key]: value
   }).then(() => {
-    var end = performance.now()
+    let end = performance.now()
     console.log(`Call to setData took ${end - start} milliseconds`)
   })
 }
@@ -235,6 +236,36 @@ function smallJournalChangeState(editting){
   }
 }
 
+function getDataForExport(year){
+  var str = "";
+  for(var monthNum = 1; monthNum <= month.length; monthNum++){
+    var monthDays = new Date(year,monthNum,0).getDate()
+    for(var dateNum = 1; dateNum <= monthDays; dateNum++){
+      var entry = getEntry(year,monthNum,dateNum)
+      str += year + "-" + monthNum + "-" + dateNum
+      str += "\n"
+      str += entry.entry || "No journal today."
+      str += "\n"
+      str += "feeling " + (feelings[entry.mood] || "N/A")
+      str += "\n\n\n"
+    }
+  }
+  return str
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 //EVENTS
 function onDataLoaded(){
   smallTextbox.value = userData[selectedYear.toString()][selectedMonth-1][selectedDay-1].entry
@@ -337,6 +368,10 @@ function onDateClicked(element){
   goToJournalPage()
 }
 
+function onExportClicked(){
+    download("my-" + selectedYear + "-year-in-review.txt", getDataForExport(selectedYear))
+}
+
 function onDateHover(element, left){
   var date = getDateFromElement(element)
   if(left){
@@ -356,7 +391,7 @@ expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
 helpButton.addEventListener("click",toggleQuestionMark)
-
+exportButton.addEventListener("click",onExportClicked)
 
 miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
 miniBadButton.addEventListener("click",function(){ onMoodPicked(1)})
