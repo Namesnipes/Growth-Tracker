@@ -464,13 +464,13 @@ td{
 #helpWindow{
   position: absolute;
   display: none;
-  height: 200px;
+  height: 230px;
   width: 250px;
   background-color: #C6E5B7;
   border: 3px solid black;
   z-index: 3;
   left: 55px;
-  top: 100px;
+  top: 80px;
   border-radius: 2px;
   padding: 10px;
   box-shadow: 3px 5px 12px 0px grey;
@@ -492,4 +492,23 @@ td{
   display: block;
   width: 143px;
   margin: 0px auto;
+}
+#exportButton{
+  display: block;
+  margin: 12px auto;
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  width: 90px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+}
+#exportButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
 }
