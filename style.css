@@ -461,3 +461,34 @@ td{
   right: 0px;
   display: none;
 }
+#helpWindow{
+  position: absolute;
+  display: block;
+  height: 200px;
+  width: 250px;
+  background-color: #C6E5B7;
+  border: 3px solid black;
+  z-index: 3;
+  left: 65px;
+  top: 100px;
+  border-radius: 2px;
+  padding: 10px;
+}
+#helpWindow h4{
+  text-align: center;
+  font-size: 14px;
+  margin-top: 0px;
+}
+#guide{
+  font-size: 11px;
+}
+#cmdcat{
+  font-style: italic;
+  text-align: center;
+  font-size: 10px;
+}
+#kofi{
+  display: block;
+  width: 143px;
+  margin: 0px auto;
+}
