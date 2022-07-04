@@ -464,7 +464,7 @@ td{
 #helpWindow{
   position: absolute;
   display: none;
-  height: 230px;
+  height: 280px;
   width: 250px;
   background-color: #C6E5B7;
   border: 3px solid black;
@@ -495,7 +495,7 @@ td{
 }
 #exportButton{
   display: block;
-  margin: 12px auto;
+  margin: 0px auto;
   background-color: #58CCAD;
   font-size: 10px;
   text-align: center;
@@ -511,4 +511,8 @@ td{
   background-color: #15A0B0;
   animation-name: buttonFade;
   animation-duration: 0.3s;
+}
+#warning{
+  font-size: 10px;
+  text-align: center;
 }
