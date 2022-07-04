@@ -463,7 +463,7 @@ td{
 }
 #helpWindow{
   position: absolute;
-  display: block;
+  display: none;
   height: 200px;
   width: 250px;
   background-color: #C6E5B7;

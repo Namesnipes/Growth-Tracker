@@ -11,6 +11,7 @@ var journalEditState2 = false
 var expandButton = document.getElementById("expandButton")
 var cornerButton = document.getElementById("cornerButton")
 var homeButton = document.getElementById("homeButton")
+var helpButton = document.getElementById("helpButton")
 
 var horribleButton = document.getElementById("horrible")
 var badButton = document.getElementById("bad")
@@ -39,7 +40,8 @@ var yearDropdown = document.getElementById("year")
 var homePage = document.getElementById("HomeContent")
 var calendarPage  = document.getElementById("calendarPage")
 var journalPage = document.getElementById("journalPage")
-
+var questionPage = document.getElementById("helpWindow")
+var isQuestioning = false;
 
 var now = new Date()
 var selectedDay = now.getDate() // range: 1-31
@@ -82,6 +84,15 @@ function goToJournalPage(){
   calendarPage.style.display = 'none'
   journalPage.style.display = 'block'
   yearChanger.style.display = 'none'
+}
+
+function toggleQuestionMark(){
+  isQuestioning = !isQuestioning
+  if(isQuestioning){
+    questionPage.style.display = "block"
+  } else {
+    questionPage.style.display = "none"
+  }
 }
 
 
@@ -344,6 +355,7 @@ bigJournalSaveEditButton.addEventListener("click", onBigJournalSubmit)
 expandButton.addEventListener("click", onJournalExpanded)
 cornerButton.addEventListener("click",onCornerClicked)
 homeButton.addEventListener("click",onHomeButtonClicked)
+helpButton.addEventListener("click",toggleQuestionMark)
 
 
 miniHorribleButton.addEventListener("click",function(){ onMoodPicked(0)})
