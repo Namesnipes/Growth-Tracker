@@ -473,6 +473,7 @@ td{
   top: 100px;
   border-radius: 2px;
   padding: 10px;
+  box-shadow: 3px 5px 12px 0px grey;
 }
 #helpWindow h4{
   text-align: center;
