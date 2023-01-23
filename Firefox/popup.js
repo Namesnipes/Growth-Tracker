@@ -101,7 +101,7 @@ function toggleQuestionMark(){
 
 
 function setData(key,value){
-  console.log("Setting:" + key + " to " + typeof(value) + " of length " + value.length)
+  console.log("DATA UPDATE - setting key \"" + key + "\" to " + typeof(value) + " of length " + value.length)
   let start = performance.now()
   browser.storage.local.set({
     [key]: value
@@ -285,6 +285,9 @@ function onDataLoaded(){
 function onPageLoaded(){
   for(var i = 2022; i <= now.getFullYear()+1; i++){
     var e = document.createElement("option")
+    if(now.getFullYear() === i) {
+      e.selected="selected"
+    }
     e.value = i.toString()
     e.textContent = i.toString()
     yearDropdown.appendChild(e)
@@ -431,7 +434,7 @@ function setupPage(year){
         element.style['border'] = "none"
         continue
       }
-
+      element.style['border'] = ""
       element.addEventListener("mouseout", function(){onDateHover(element, true)})
       element.addEventListener("mouseover", function(){onDateHover(element, false)})
 
@@ -450,7 +453,7 @@ function setupPage(year){
 }
 
 /**
- * Populates the "userData" variable with an object containing dates and their corresponding journal entries and mood level
+ * Format of data: Every year has a different key in the users local storage, 2023 is stored as USER_DATA_2023
  * The data can be accessed like so: Object["Year"][MonthNumber-1][DateNumber-1]
  * this returns user data for a single date in the form {"entry": "Journal Entry", "mood": -1}
  * Ex. to access user data of June 7, 2022 (2022-06-07) you would type: Object["2022"][5][6]
