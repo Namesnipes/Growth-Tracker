@@ -1,0 +1,518 @@
+@font-face {
+  font-family: "Calistoga";
+  src: url("assets/Calistoga-Regular.ttf");
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/Cousine-Regular.ttf");
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("assets/Cousine-Italic.ttf");
+  font-style: italic;
+}
+@keyframes buttonFade{
+  from{background-color: #58CCAD;}
+  to{background-color: #15A0B0;}
+}
+body{
+  width: 400;
+  height: 550;
+  background-color: #F1ECE3;
+  background-image: url("assets/bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+h1, h2, h3, h4{
+  font-family: "Calistoga", serif;
+  font-weight: normal;
+}
+p{
+  font-family: "Cousine", monospace;
+}
+#content{
+  margin: 10px;
+  position: relative;
+  height: 530px;
+}
+#HomeContent{
+  position: relative;
+  margin: 0px;
+}
+.headers{
+  text-align: center;
+}
+#yearHeader{
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+#currentDayHeader{
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+#image{
+  height: 255px;
+  width: auto;
+  display: block;
+  margin: 0px auto;
+  background-image: url("assets/ok.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.clear{
+  clear: both;
+}
+#horrible{
+  width: 30px;
+  height: 30px;
+  background-color: #0061A1;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#horrible:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
+#horrible:hover p{
+  visibility: visible;
+}
+#bad{
+  width: 30px;
+  height: 30px;
+  background-color: #15A0B0;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#bad:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
+#bad:hover p{
+  visibility: visible;
+}
+#ok{
+  width: 30px;
+  height: 30px;
+  background-color: #58CCAD;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#ok:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
+#ok:hover p{
+  visibility: visible;
+}
+#good{
+  width: 30px;
+  height: 30px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#good:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
+#good:hover p{
+  visibility: visible;
+}
+#great{
+  width: 30px;
+  height: 30px;
+  background-color: #9CD97E;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+#great:hover{
+  box-shadow: 0px 0px 0px 3px #C7B89F;
+}
+#great:hover p{
+  visibility: visible;
+}
+#moodButtons{
+  display: block;
+  margin: 0px auto;
+  width: 200px;
+  padding: 10px;
+}
+.moods{
+  font-size: 10px;
+  margin-top: 36px;
+  text-align: center;
+  visibility: hidden;
+  user-select: none;
+}
+textarea{
+  resize: none;
+  border: none;
+  background-color: #C6E5B7;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 2px;
+  font-family: "Cousine", monospace;
+}
+#miniJournal{
+  padding-top: 8px;
+  padding-bottom: 4px;
+  display: block;
+  width: 270px;
+  margin: 0px auto;
+  height: 100px;
+}
+#notes{
+  width: 270px;
+  height: 80px;
+}
+#expandButton{
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  margin: 3px 5px 0px 0px;
+  width: 40px;
+  height: 15px;
+  padding: 2px;
+  float: right;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+}
+#expandButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#journalSubmitButton{
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  margin-top: 3px;
+  width: 25px;
+  height: 15px;
+  padding: 2px;
+  float: right;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+}
+#journalSubmitButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#journalPage{
+  display: none;
+  margin-top: 15px;
+}
+#largeJournal{
+  display: block;
+  width: 360px;
+  margin: 0px auto;
+  height: 360px;
+}
+h4{
+  margin-bottom: 1px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+#calendarPage{
+  display: none;
+}
+table{
+  border-collapse: collapse;
+  width: 380px;
+}
+td{
+  border: 1px solid black;
+  width: 12.2px;
+  height: 12.2px;
+  font-size: 5px;
+  background-color: #F1ECE3;
+}
+#buttons{
+  width: 380px;
+  height: 24px;
+  position: absolute;
+  bottom: 0px;
+  margin: 0px;
+}
+#homeIcon{
+  height: 20px;
+  width: auto;
+}
+#homeButton{
+  height: 20px;
+  width: 20px;
+  padding: 2px;
+  background-color: #58CCAD;
+  border-radius: 2px;
+  float: left;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#homeButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#helpIcon{
+  height: 20px;
+  width: auto;
+}
+#helpButton{
+  height: 20px;
+  width: 20px;
+  padding: 2px;
+  background-color: #58CCAD;
+  border-radius: 2px;
+  float: left;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#helpButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#calendarIcon{
+  height: 20px;
+  width: auto;
+}
+#cornerButton{
+  height: 20px;
+  width: 20px;
+  padding: 2px;
+  background-color: #58CCAD;
+  border-radius: 2px;
+  float: left;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#cornerButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#year{
+  font-family: "Calistoga", serif;
+  font-size: 18px;
+  display: block;
+  text-align: center;
+  width: 80px;
+  background-color: #58CCAD;
+  border-style: none;
+  border-radius: 2px;
+  height: 24px;
+}
+#yearChanger{
+  display: block;
+  width: 80px;
+  margin: 0px auto;
+  display: none;
+}
+#todayWas{
+  width: 360px;
+  margin: 0px auto;
+  height: 30px;
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+.moodSentence{
+  float: left;
+  line-height: 0px;
+  margin-left: 5px;
+  margin-right: 8px;
+  font-style: italic;
+}
+#todayMood{
+  width: 20px;
+  height: 20px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#sentence{
+  height: 30px;
+  width: 250px;
+  float: left;
+  display: none;
+}
+#journalButtons{
+  width: 34px;
+  height: 20px;
+  margin: 5px;
+  float: right;
+}
+#save{
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  width: 30px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+  float: right;
+}
+#save:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#moodOptions{
+  height: 30px;
+  float: left;
+}
+.miniMoods{
+  font-size: 9px;
+  margin-top: 25px;
+  text-align: center;
+  visibility: hidden;
+  user-select: none;
+}
+#miniAwful{
+  width: 20px;
+  height: 20px;
+  background-color: #0061A1;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniAwful:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
+#miniAwful:hover p{
+  visibility: visible;
+}
+#miniBad{
+  width: 20px;
+  height: 20px;
+  background-color: #15A0B0;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniBad:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
+#miniBad:hover p{
+  visibility: visible;
+}
+#miniOk{
+  width: 20px;
+  height: 20px;
+  background-color: #58CCAD;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniOk:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
+#miniOk:hover p{
+  visibility: visible;
+}
+#miniGood{
+  width: 20px;
+  height: 20px;
+  background-color: #62B378;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniGood:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
+#miniGood:hover p{
+  visibility: visible;
+}
+#miniGreat{
+  width: 20px;
+  height: 20px;
+  background-color: #9CD97E;
+  float: left;
+  margin: 5px;
+  border-radius: 2px;
+}
+#miniGreat:hover{
+  box-shadow: 0px 0px 0px 2px #C7B89F;
+}
+#miniGreat:hover p{
+  visibility: visible;
+}
+#dayPreview{
+  font-family: "Calistoga", serif;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  display: none;
+}
+#helpWindow{
+  position: absolute;
+  display: none;
+  height: 280px;
+  width: 250px;
+  background-color: #C6E5B7;
+  border: 3px solid black;
+  z-index: 3;
+  left: 55px;
+  top: 80px;
+  border-radius: 2px;
+  padding: 10px;
+  box-shadow: 3px 5px 12px 0px grey;
+}
+#helpWindow h4{
+  text-align: center;
+  font-size: 14px;
+  margin-top: 0px;
+}
+#guide{
+  font-size: 11px;
+}
+#cmdcat{
+  font-style: italic;
+  text-align: center;
+  font-size: 10px;
+}
+#kofi{
+  display: block;
+  width: 143px;
+  margin: 0px auto;
+}
+#exportButton{
+  display: block;
+  margin: 0px auto;
+  background-color: #58CCAD;
+  font-size: 10px;
+  text-align: center;
+  line-height: 15px;
+  width: 90px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Cousine", monospace;
+}
+#exportButton:hover{
+  background-color: #15A0B0;
+  animation-name: buttonFade;
+  animation-duration: 0.3s;
+}
+#warning{
+  font-size: 10px;
+  text-align: center;
+}

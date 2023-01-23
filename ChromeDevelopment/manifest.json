@@ -1,0 +1,22 @@
+{
+
+  "description": "Plant themed journal and mood tracker!",
+  "manifest_version": 3,
+  "name": "Growth Tracker",
+  "version": "0.12",
+  "permissions": [
+  "storage"
+],
+  "homepage_url": "https://github.com/Namesnipes/Extension",
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "action": {
+    "default_popup": "main.html",
+    "default_title": "Growth Tracker"
+  }
+
+}
