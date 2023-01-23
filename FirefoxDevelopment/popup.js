@@ -285,6 +285,9 @@ function onDataLoaded(){
 function onPageLoaded(){
   for(var i = 2022; i <= now.getFullYear()+1; i++){
     var e = document.createElement("option")
+    if(now.getFullYear() === i) {
+      e.selected="selected"
+    }
     e.value = i.toString()
     e.textContent = i.toString()
     yearDropdown.appendChild(e)
