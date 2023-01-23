@@ -1,8 +1,8 @@
 {
 
-  "description": "Plant themed journal and mood tracker!",
+  "description": "Developer version - Growth Tracker",
   "manifest_version": 2,
-  "name": "Growth Tracker",
+  "name": "Developer version - Growth Tracker",
   "version": "0.12",
   "permissions": [
   "storage"
@@ -19,7 +19,12 @@
   },
   "browser_action": {
     "default_popup": "main.html",
-    "default_title": "Growth Tracker"
+    "default_title": "Developer version - Growth Tracker"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "growth-tracker-dev-test@growth-tracking.com"
+    }
   }
 
 }
