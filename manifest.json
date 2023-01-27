@@ -1,9 +1,9 @@
 {
 
   "description": "Plant themed journal and mood tracker!",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Growth Tracker",
-  "version": "0.13",
+  "version": "0.12",
   "permissions": [
   "storage"
 ],
@@ -14,7 +14,10 @@
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
   },
-  "action": {
+  "background": {
+    "scripts": []
+  },
+  "browser_action": {
     "default_popup": "main.html",
     "default_title": "Growth Tracker"
   }
