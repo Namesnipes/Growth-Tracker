@@ -2,7 +2,7 @@
   "description": "Plant themed journal and mood tracker!",
   "manifest_version": 2,
   "name": "Growth Tracker",
-  "version": "0.13",
+  "version": "0.14",
   "permissions": [
   "storage"
 ],
